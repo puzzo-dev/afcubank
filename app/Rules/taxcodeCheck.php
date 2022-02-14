@@ -27,7 +27,6 @@ class taxcodeCheck implements Rule
     public function passes($attribute, $value)
     {
         $otp = otp::Firstwhere('otp',$value);
-        //dd($otp);
         if($otp != NULL)
         {
             return true;
