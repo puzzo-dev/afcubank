@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\txn;
 use App\Models\otp;
 use App\Models\account;
-use App\Models\User;
-use App\Models\r_account;
+// use App\Models\User;
+// use App\Models\r_account;
 use App\Rules\enoughbal;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,7 +65,7 @@ class txnscontroller extends Controller
 
         $desc = $request->input('desc');
 
-        if ($desc == Null) {
+        if ($desc == null) {
             $desc = "You have sent $" . $request->input('amt') . " to " . $request->input('r_acc');
         }
 

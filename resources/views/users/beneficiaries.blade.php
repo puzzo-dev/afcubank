@@ -56,7 +56,7 @@
                                         <td>{{ $txn->bname }}</td>
                                         <td>{{ $txn->swiftcode }}</td>
                                         <td>{{ $txn->remarks }}</td>
-                                        <td><a class="btn btn-sm btn-primary" href="#">Edit</a> / <a class="btn btn-sm btn-danger" href="#">Delete</a></td>
+                                        <td><a class="text-danger" href="#">Delete</a></td>
                                     @empty
                                         <td>No Transactions Available on this Account</td>
                                     </tr>

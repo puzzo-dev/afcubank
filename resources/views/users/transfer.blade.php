@@ -99,7 +99,7 @@
                                         <td>{{ $txn->txn_flow }}</td>
                                         <td>{{ date('d-m-Y', strtotime($txn->created_at)) }}</td>
                                         @if ($txn->txn_type == 'Local Transfer')
-                                        @if($txn->txn_status == 'Complete')
+                                        @if($txn->txn_status == 'Completed')
                                             <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
                                         @elseif($txn->txn_status == 'Pending')
                                             <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>
@@ -107,7 +107,7 @@
                                             <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
                                         @endif
                                         @else
-                                        @if ($txn->txn_status == 'Complete')
+                                        @if ($txn->txn_status == 'Completed')
                                             <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
                                         @elseif($txn->txn_status == 'Pending')
                                             <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>

@@ -25,7 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         //$user = txn::where('account_id', Auth::user()->accounts[0]['id'])->paginate(4);
-        $txns = Auth::user()->txns->take(4);
+        $txn = Auth::user()->txns->take(-4);
+        $txns = collect($txn)->sortByDesc('id');
         return view('home',['txns'=>$txns]);
     }
 }

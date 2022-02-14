@@ -69,7 +69,7 @@
                                     <td>$ {{ $txn->txn_amount}}</td>
                                     <td>{{ $txn->txn_flow }}</td>
                                     <td>{{ $txn->created_at }}</td>
-                                    @if($txn->txn_status == "Complete")
+                                    @if($txn->txn_status == "Completed")
                                     <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
                                     @else
                                     <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\Models\txn;
+use App\Models\txn;
+use App\Models\otp;
 use App\Rules\taxcodeCheck;
+use Illuminate\Support\Facades\Auth;
 
 class otpController extends Controller
 {
@@ -24,7 +26,15 @@ class otpController extends Controller
      */
     public function index(Request $txn)
     {
-        return view('users.otp')->with('txn',$txn->txn);
+        $sum_of_transaction = txn::where('account_id', Auth::user()->accounts[0]['id'])->count();
+        $debit_sum = txn::where('txn_flow', 'DEBIT')->sum('txn_amount');
+        $credit_sum = txn::where('txn_flow', 'CREDIT')->sum('txn_amount');
+        $tx = txn::where('id',$txn->txn)->get();
+        if($tx[0]['txn_status'] == "Completed")
+        {
+            return redirect()->route('home');
+        }
+        return view('users.otp',['txn'=>$txn->txn,'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
     }
 
     /**
@@ -80,9 +90,13 @@ class otpController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'taxcode'=>['required', new taxcodeCheck()],
+            'taxcode'=>['required', new taxcodeCheck(),'max:6'],
         ]);
-        dd($request, $id);
+        $txn = txn::where('id',$id)->update(['txn_status'=>"Completed"]);
+        $txns = txn::find($id)->get();
+        $this->destroy($id);
+        foreach($txns as $txn);
+        return view('users.TransferResult',['txn'=>$txn]);
     }
 
     /**
@@ -93,6 +107,7 @@ class otpController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $otp = otp::where('txns_id',$id)->delete();
+        return $otp;
     }
 }
