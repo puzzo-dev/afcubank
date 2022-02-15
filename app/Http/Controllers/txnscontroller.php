@@ -33,8 +33,6 @@ class txnscontroller extends Controller
         $sum_of_transaction = txn::where('account_id', Auth::user()->accounts[0]['id'])->count();
         $debit_sum = txn::where('txn_flow', 'DEBIT')->sum('txn_amount');
         $credit_sum = txn::where('txn_flow', 'CREDIT')->sum('txn_amount');
-        // foreach($txns as $txn)
-        // dd($txn->otps);
         return view('users.transfer', ['txns' => $txns, 'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
     }
 
@@ -88,7 +86,7 @@ class txnscontroller extends Controller
             $txn->save();
             if($txn){
                 $otp = new otp;
-                $otp->txns_id = $txn->id;
+                $otp->txn_id = $txn->id;
                 $otp->otp = rand(111111,999999);
                 $otp->save();
                 //dd($otp);
@@ -138,7 +136,17 @@ class txnscontroller extends Controller
      */
     public function edit($id)
     {
-        //
+        $txn = txn::find($id);
+        $otp = $txn->otps;
+        if($txn && $otp)
+        {
+            if($txn->txn_status == "Pending" && $txn->txn_type == "International Transfer")
+            {
+                return redirect()->route('otp.edit', ['otp'=>$otp]);
+            }
+            return view('users.transferResult', ['txn'=>$txn]);
+        }
+        return redirect()->back(); //go back code should be here
     }
 
     /**

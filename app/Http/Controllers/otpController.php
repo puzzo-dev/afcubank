@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\txn;
 use App\Models\otp;
 use App\Rules\taxcodeCheck;
-use Illuminate\Support\Facades\Auth;
 
 class otpController extends Controller
 {
@@ -26,15 +25,7 @@ class otpController extends Controller
      */
     public function index()
     {
-        // $sum_of_transaction = txn::where('account_id', Auth::user()->accounts[0]['id'])->count();
-        // $debit_sum = txn::where('txn_flow', 'DEBIT')->sum('txn_amount');
-        // $credit_sum = txn::where('txn_flow', 'CREDIT')->sum('txn_amount');
-        // $tx = txn::where('id',$txn->txn)->get();
-        // if($tx[0]['txn_status'] == "Completed")
-        // {
-        //     return redirect()->route('home');
-        // }
-        // return view('users.otp',['txn'=>$txn->txn,'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
+            return redirect()->route('txns.index');
     }
 
     /**
@@ -77,7 +68,12 @@ class otpController extends Controller
      */
     public function edit($id)
     {
-        return view('users.otp',['id'=>$id]);
+        $otp = otp::find($id);
+        if($otp){
+            return view('users.otp',['id'=>$id]);
+        }
+        return redirect()->back();
+
     }
 
     /**
@@ -94,9 +90,8 @@ class otpController extends Controller
             'taxcode'=>['required', new taxcodeCheck(),'max:6'],
         ]);
         $otp = otp::find($id);
-        $txn = txn::where('id',$otp->txns_id)->update(['txn_status'=>"Completed"]);
-        $txninfo = txn::find($otp->txns_id);
-        //dd($txn, $otp, $txninfo);
+        $txn = txn::where('id',$otp->txn_id)->update(['txn_status'=>"Completed"]);
+        $txninfo = txn::find($otp->txn_id);
         $this->destroy($id);
         return view('users.TransferResult',['txninfo'=>$txninfo]);
     }
@@ -109,7 +104,7 @@ class otpController extends Controller
      */
     public function destroy($id)
     {
-        $otp = otp::where('txns_id',$id)->delete();
+        $otp = otp::find($id)->delete();
         return $otp;
     }
 }

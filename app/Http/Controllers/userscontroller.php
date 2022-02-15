@@ -105,7 +105,12 @@ class userscontroller extends Controller
      */
     public function edit($id)
     {
+        $user = user::find($id);
+        if($user)
+        {
         return view('users.settings',['id'=>$id]);
+        }
+        //Go back code should be here
     }
 
     /**

@@ -111,7 +111,7 @@
                                             <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
                                         @elseif($txn->txn_status == 'Pending')
                                             <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>
-                                            <td><a class="text-primary" href="{{ route('otp.edit', ['otp'=>$txn->otps->id])}}">finish</a> <br><br><a class="text-danger" href="#">cancel</a></td>
+                                            <td><a class="text-primary" href="{{ route('txns.edit',$txn)}}">finish</a> <br><br><a class="text-danger" href="#">cancel</a></td>
                                              @else
                                             <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
                                         @endif
@@ -121,7 +121,7 @@
                                     </tr>
                                 @endforelse
                             </tbody>
-                            {{ $user->links() }}
+                            {{ $txns->links() }}
                         </table>
                     </div>
 
