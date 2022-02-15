@@ -9,7 +9,7 @@ class otp extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'txns_id',
+        'txn_id',
         'otp',
     ];
 

@@ -24,17 +24,17 @@ class otpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $txn)
+    public function index()
     {
-        $sum_of_transaction = txn::where('account_id', Auth::user()->accounts[0]['id'])->count();
-        $debit_sum = txn::where('txn_flow', 'DEBIT')->sum('txn_amount');
-        $credit_sum = txn::where('txn_flow', 'CREDIT')->sum('txn_amount');
-        $tx = txn::where('id',$txn->txn)->get();
-        if($tx[0]['txn_status'] == "Completed")
-        {
-            return redirect()->route('home');
-        }
-        return view('users.otp',['txn'=>$txn->txn,'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
+        // $sum_of_transaction = txn::where('account_id', Auth::user()->accounts[0]['id'])->count();
+        // $debit_sum = txn::where('txn_flow', 'DEBIT')->sum('txn_amount');
+        // $credit_sum = txn::where('txn_flow', 'CREDIT')->sum('txn_amount');
+        // $tx = txn::where('id',$txn->txn)->get();
+        // if($tx[0]['txn_status'] == "Completed")
+        // {
+        //     return redirect()->route('home');
+        // }
+        // return view('users.otp',['txn'=>$txn->txn,'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
     }
 
     /**
@@ -77,7 +77,7 @@ class otpController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('users.otp',['id'=>$id]);
     }
 
     /**
@@ -89,14 +89,16 @@ class otpController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request);
         $this->validate($request,[
             'taxcode'=>['required', new taxcodeCheck(),'max:6'],
         ]);
-        $txn = txn::where('id',$id)->update(['txn_status'=>"Completed"]);
-        $txns = txn::find($id)->get();
+        $otp = otp::find($id);
+        $txn = txn::where('id',$otp->txns_id)->update(['txn_status'=>"Completed"]);
+        $txninfo = txn::find($otp->txns_id);
+        //dd($txn, $otp, $txninfo);
         $this->destroy($id);
-        foreach($txns as $txn);
-        return view('users.TransferResult',['txn'=>$txn]);
+        return view('users.TransferResult',['txninfo'=>$txninfo]);
     }
 
     /**

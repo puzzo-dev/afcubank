@@ -91,7 +91,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($user as $txn)
+                                @forelse($txns as $txn)
                                     <tr class="grid-margin">
                                         <td>{{ $txn->txn_no }}</td>
                                         <td>$ {{ $txn->txn_amount }}</td>
@@ -111,7 +111,7 @@
                                             <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
                                         @elseif($txn->txn_status == 'Pending')
                                             <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>
-                                            <td><a class="text-primary" href="{{ route('otp.index',['txn'=>$txn->id]) }}">finish</a> <br><br><a class="text-danger" href="#">cancel</a></td>
+                                            <td><a class="text-primary" href="{{ route('otp.edit', ['otp'=>$txn->otps->id])}}">finish</a> <br><br><a class="text-danger" href="#">cancel</a></td>
                                              @else
                                             <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
                                         @endif

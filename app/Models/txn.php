@@ -33,7 +33,7 @@ class txn extends Model
 
     public function otps()
     {
-        return $this->HasMany(otp::class);
+        return $this->HasOne(otp::class, 'txn_id');
     }
 
 

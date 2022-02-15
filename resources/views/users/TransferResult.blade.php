@@ -30,7 +30,7 @@
         <div class="col-md-8 grid-margin stretch-card">
             <div class="card tale-bg">
                 <div class="card-body mt-auto">
-                    <h4 class="card-title">Your {{ $txn->txn_type }} is {{ $txn->txn_status }}</h4>
+                    <h4 class="card-title">Your {{ $txninfo->txn_type }} is {{ $txninfo->txn_status }}</h4>
                     <p class="card-description"></p>
                 </div>
             </div>

@@ -27,38 +27,7 @@
 
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 grid-margin stretch-card">
-            <div class="card tale-bg">
-                <div class="card-body mt-auto">
-                    <h4 class="card-title">User Information</h4>
-                    <ul class="list-arrow font-weight-bold text-uppercase">
-                        <li>Account Name: {{ Auth::user()->f_name }} {{ Auth::user()->l_name }}</li>
-                        <li>Phone Number: {{ Auth::user()->phone }}</li>
-                        <li>Email: {{ Auth::user()->email }}</li>
-                        {{-- <li>Account Name: {{ $user->f_name }}</li> --}}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 grid-margin stretch-card">
-            <div class="card tale-bg">
-                <div class="card-body mt-auto">
-                    <h4 class="card-title">Transfer Summary</h4>
-                    <ul class="list-arrow font-weight-bold text-uppercase">
-                        @forelse(Auth::user()->accounts as $account)
-                            <li>Total Number of Transfer: {{ $sum_of_transaction }}</li>
-                            <li>Total Incoming Funds: ${{ $credit_sum }}</li>
-                            <li>Total Outgoing Funds: ${{ $debit_sum }}</li>
-                            <li class="text-danger">Current Balance: ${{ $account['bal'] }}</li>
-                        @empty
-                            <li>This User Doesn't Have an Account</li>
-                        @endforelse
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+  
     <div class="row">
         <div class="col-md-8 grid-margin stretch-card">
             <div class="card">
@@ -67,7 +36,7 @@
                     <p class="card-desc">If you do not have a Tax Code, Contact your Account manager for Information on
                         Tax Code to complete this
                         transaction</p>
-                    <form action="{{ route('otp.update',$txn)}}" id="intltxn" id="otp" method="POST">
+                    <form action="{{ route('otp.update',$id) }}" id="intltxn" id="otp" method="POST">
                         @csrf
                         {{ method_field('PUT') }}
                         <div class="form-group row">

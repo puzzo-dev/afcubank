@@ -29,12 +29,13 @@ class txnscontroller extends Controller
      */
     public function index()
     {
-        $user = txn::where('account_id', Auth::user()->accounts[0]['id'])->paginate(4);
+        $txns = txn::where('account_id', Auth::user()->accounts[0]['id'])->orderBy('id', 'desc')->paginate(4);
         $sum_of_transaction = txn::where('account_id', Auth::user()->accounts[0]['id'])->count();
         $debit_sum = txn::where('txn_flow', 'DEBIT')->sum('txn_amount');
         $credit_sum = txn::where('txn_flow', 'CREDIT')->sum('txn_amount');
-        //dd($user);
-        return view('users.transfer', ['user' => $user, 'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
+        // foreach($txns as $txn)
+        // dd($txn->otps);
+        return view('users.transfer', ['txns' => $txns, 'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
     }
 
     /**
@@ -90,8 +91,9 @@ class txnscontroller extends Controller
                 $otp->txns_id = $txn->id;
                 $otp->otp = rand(111111,999999);
                 $otp->save();
+                //dd($otp);
                 if ($otp){
-                    return redirect()->route('otp.index', ['txn'=>$txn]);
+                    return redirect()->route('otp.edit', ['otp'=>$otp]);
                 }
             }
 
