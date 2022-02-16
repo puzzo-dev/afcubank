@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\recipientController;
 use App\Http\Controllers\kycController;
 use App\Http\Controllers\otpController;
+use App\Http\Controllers\notificationController;
 // use
 
 /*
@@ -24,13 +25,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/loans', function () {
+    return view('users.loans');
+})->name('loans');
+
 // Route::resource('/admin', userscontroller::class);
 Auth::routes(['verify' => true]);
-
 Route::resource('/txns', txnscontroller::class);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('/accusers', userscontroller::class);
 Route::resource('/beneficiaries', recipientController::class);
 Route::resource('/kyc', kycController::class);
 Route::resource('/otp', otpController::class);
+Route::resource('/notifications', notificationController::class);
 

@@ -1,7 +1,7 @@
 @extends('users.layouts.app')
 @section('content')
-    @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="row">
         <div class="col-md-12 grid-margin">
@@ -77,44 +77,67 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">All Time Transaction History</h4>
-                    <p class="card-desciption">View all your transactions here, you can also cancel or complete pending transactions using the buttons beside each transaction</p>
+                    <p class="card-desciption">View all your transactions here, you can also cancel or complete pending
+                        transactions using the buttons beside each transaction</p>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th>#</th>
+                                    <th>Receiver's Account</th>
                                     <th>Transaction No</th>
                                     <th>Amount</th>
-                                    <th>Transaction Decription</th>
-                                    <th>Transaction Type</th>
-                                    <th>Transaction Date</th>
+                                    <th>Transaction Date / Desc</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($txns as $txn)
                                     <tr class="grid-margin">
+                                        @if ($txn->txn_flow == 'DEBIT')
+                                            <td>
+                                                <i class="ti-arrow-top-right menu-icon text-danger"></i>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <i class="ti-arrow-down-left menu-icon text-primary"></i>
+                                            </td>
+                                        @endif
+                                        <td>{{ $txn->r_accounts->r_acc_no}}</td>
                                         <td>{{ $txn->txn_no }}</td>
                                         <td>$ {{ $txn->txn_amount }}</td>
-                                        <td class="text-wrap">{{ $txn->txn_desc }}</td>
-                                        <td>{{ $txn->txn_flow }}</td>
-                                        <td>{{ date('d-m-Y', strtotime($txn->created_at)) }}</td>
+                                        {{-- <td class="text-wrap">{{ $txn->txn_desc }}</td> --}}
+                                        <td class="text-wrap">{{ $txn->txn_desc }} on
+                                            {{ date('d-m-Y', strtotime($txn->created_at)) }}</td>
                                         @if ($txn->txn_type == 'Local Transfer')
-                                        @if($txn->txn_status == 'Completed')
-                                            <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
-                                        @elseif($txn->txn_status == 'Pending')
-                                            <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>
+                                            @if ($txn->txn_status == 'Completed')
+                                                <td><label class="badge badge-success">{{ $txn->txn_status }}</label>
+                                                </td>
+                                            @elseif($txn->txn_status == 'Pending')
+                                                <td><label class="badge badge-warning">{{ $txn->txn_status }}</label>
+                                                </td>
                                             @else
-                                            <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
-                                        @endif
+                                                <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
+                                            @endif
                                         @else
-                                        @if ($txn->txn_status == 'Completed')
-                                            <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
-                                        @elseif($txn->txn_status == 'Pending')
-                                            <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>
-                                            <td><a class="text-primary" href="{{ route('txns.edit',$txn)}}">finish</a> <br><br><a class="text-danger" href="#">cancel</a></td>
-                                             @else
-                                            <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
-                                        @endif
+                                            @if ($txn->txn_status == 'Completed')
+                                                <td><label class="badge badge-success">{{ $txn->txn_status }}</label>
+                                                </td>
+                                            @elseif($txn->txn_status == 'Pending')
+                                                <td><label class="badge badge-warning">{{ $txn->txn_status }}</label>
+                                                </td>
+                                                <td><a class="text-primary" href="{{ route('txns.edit', $txn) }}">Finish</a><hr>
+                                                    <a class="text-danger" href="{{ route('txns.update',  $txn) }}" onclick="event.preventDefault(); document.getElementById('update-form').submit();">Cancel</a>
+                                                    <form id="update-form" action="{{ route('txns.update',  $txn) }}" method="POST"
+                                                        class="d-none">
+                                                        @csrf
+                                                        {{ method_field('PUT') }}
+                                                    </form>
+                                                </td>
+                                            @else
+                                                <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
+                                            @endif
                                         @endif
                                     @empty
                                         <td>No Transactions Available on this Account</td>

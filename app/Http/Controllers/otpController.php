@@ -16,7 +16,7 @@ class otpController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class otpController extends Controller
      */
     public function index()
     {
-            return redirect()->route('txns.index');
+        return redirect()->route('txns.index');
     }
 
     /**
@@ -90,7 +90,7 @@ class otpController extends Controller
             'taxcode'=>['required', new taxcodeCheck(),'max:6'],
         ]);
         $otp = otp::find($id);
-        $txn = txn::where('id',$otp->txn_id)->update(['txn_status'=>"Completed"]);
+        txn::where('id',$otp->txn_id)->update(['txn_status'=>"Completed"]);
         $txninfo = txn::find($otp->txn_id);
         $this->destroy($id);
         return view('users.TransferResult',['txninfo'=>$txninfo]);

@@ -1,5 +1,10 @@
 @extends('users.layouts.app')
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        @elseif(session('failure'))
+        <div class="alert alert-danger">{{ session('failure') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12 grid-margin">
             <div class="row">
@@ -44,7 +49,7 @@
                                         Branch No /<br>
                                         Sortcode</th>
                                     <th>Remarks</th>
-                                    <th></th>
+                                    <th>action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,9 +61,14 @@
                                         <td>{{ $txn->bname }}</td>
                                         <td>{{ $txn->swiftcode }}</td>
                                         <td>{{ $txn->remarks }}</td>
-                                        <td><a class="text-danger" href="#">Delete</a></td>
+                                        <td><a class="text-danger" href="{{ route('beneficiaries.destroy',  $txn) }}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">Delete</a>
+                                                    <form id="delete-form" action="{{ route('beneficiaries.destroy',  $txn) }}" method="POST"
+                                                        class="d-none">
+                                                        @csrf
+                                                        {{ method_field('DELETE') }}
+                                                    </form></td>
                                     @empty
-                                        <td>No Transactions Available on this Account</td>
+                                        <td>No Beneficiaries has been added to this Account</td>
                                     </tr>
                                 @endforelse
                             </tbody>

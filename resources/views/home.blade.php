@@ -51,41 +51,63 @@
                 <p class="card-desciption">Transaction History</p>
                 <div class="table-responsive">
                     <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Account Number</th>
-                          <th>Transaction Number</th>
-                          <th>Transaction Type</th>
-                          <th>Transaction Date</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          @forelse($txns as $txn)
+                            <thead>
                                 <tr>
-                                    <td>{{ Auth::user()->accounts[0]['acc_no'] }}</td>
-                                    <td>{{ $txn->txn_no }}</td>
-                                    <td>$ {{ $txn->txn_amount}}</td>
-                                    <td>{{ $txn->txn_flow }}</td>
-                                    <td>{{ $txn->created_at }}</td>
-                                    @if($txn->txn_status == "Completed")
-                                    <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
-                                    @else
-                                    <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>
-                                    @endif
-                                    @empty
-                                    <td>No Transactions Available on this Account</td>
+                                    <th>#</th>
+                                    <th>Receiver's Account</th>
+                                    <th>Transaction No</th>
+                                    <th>Amount</th>
+                                    <th>Transaction Date / Desc</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
-                                @endforelse
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                            </thead>
+                            <tbody>
+                                @forelse($txns as $txn)
 
+                                    <tr class="grid-margin">
+                                        @if($txn->txn_flow == "DEBIT")
+                                        <td>
+                                            <i class="ti-arrow-top-right menu-icon text-primary"></i>
+                                        </td>
+                                        @else
+                                        <td>
+                                            <i class="ti-arrow-down-left menu-icon text-danger"></i>
+                                        </td>
+                                        @endif
+                                        <td>{{ $txn->r_accounts->r_acc_no}}</td>
+                                        <td>{{ $txn->txn_no }}</td>
+                                        <td>$ {{ $txn->txn_amount }}</td>
+                                        {{-- <td class="text-wrap">{{ $txn->txn_desc }}</td> --}}
+                                        <td class="text-wrap">{{ $txn->txn_desc }} on {{ date('d-m-Y', strtotime($txn->created_at)) }}</td>
+                                        @if ($txn->txn_type == 'Local Transfer')
+                                        @if($txn->txn_status == 'Completed')
+                                            <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
+                                        @elseif($txn->txn_status == 'Pending')
+                                            <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>
+                                            @else
+                                            <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
+                                        @endif
+                                        @else
+                                        @if ($txn->txn_status == 'Completed')
+                                            <td><label class="badge badge-success">{{ $txn->txn_status }}</label></td>
+                                        @elseif($txn->txn_status == 'Pending')
+                                            <td><label class="badge badge-warning">{{ $txn->txn_status }}</label></td>
+                                            <td><a class="text-primary" href="{{ route('txns.edit',$txn)}}">finish</a> <br><br><a class="text-danger" href="#">cancel</a></td>
+                                             @else
+                                            <td><label class="badge badge-danger">{{ $txn->txn_status }}</label></td>
+                                        @endif
+                                        @endif
+                                    @empty
+                                        <td>No Transactions Available on this Account</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                            {{-- {{ $txns->links() }} --}}
+                        </table>
+                  </div>
             </div>
         </div>
-
     </div>
 </div>
 @endsection

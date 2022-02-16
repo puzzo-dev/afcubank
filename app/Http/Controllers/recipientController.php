@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\r_account;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\uniqueReceiver;
 
 class recipientController extends Controller
 {
@@ -25,7 +26,9 @@ class recipientController extends Controller
      */
     public function index()
     {
+        //$user = Auth::user()->r_accounts;
         $user = r_account::where('account_id', Auth::user()->accounts[0]['id'])->paginate(4);
+        //dd($user);
         return view('users.beneficiaries',['user'=>$user]);
     }
 
@@ -49,11 +52,13 @@ class recipientController extends Controller
     {
             $this->validate($request, [
             'r_name' => ['required','min:3'],
-            'r_acc' => ['required','min:9'],
+            'r_acc' => ['required', new uniqueReceiver(),'min:9'],
             'bname' => ['required'],
             'scode' => ['required','min:5'],
             'remarks' => ['required','min:3'],
         ]);
+
+        //dd($request);
 
         $acc_id = Auth::user()->accounts[0]['id'];
 
@@ -66,7 +71,7 @@ class recipientController extends Controller
          'remarks'=>$request->input('remarks'),
         ]);
 
-        dd($save);
+        return redirect()->back()->with('success','Beneficiary ('.$save->r_name.') has been Added Successfully');
         // Session::flash('message', 'This is a message!');
         // Session::flash('alert-class', 'alert-danger');
 
@@ -80,7 +85,7 @@ class recipientController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**
@@ -91,7 +96,7 @@ class recipientController extends Controller
      */
     public function edit($id)
     {
-        //
+       //
     }
 
     /**
@@ -114,6 +119,19 @@ class recipientController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $racc = r_account::find($id);
+        
+         if($racc == NULL){
+             return redirect()->back()->with('failure','Beneficiary was not found');
+         }
+
+         if($racc->account_id == Auth::user()->accounts[0]->id){
+             $racc->delete();
+             return redirect()->back()->with('success','Beneficiary has been Deleted Successfully');
+         }
+
+         return redirect()->back()->with('failure','Beneficiary is not yours');
+         
+         
     }
 }

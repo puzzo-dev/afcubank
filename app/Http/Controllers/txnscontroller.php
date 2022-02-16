@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\txn;
 use App\Models\otp;
 use App\Models\account;
+use App\Helpers\General\CollectionHelper;
 // use App\Models\User;
-// use App\Models\r_account;
+use App\Models\r_account;
 use App\Rules\enoughbal;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class txnscontroller extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
     /**
      * Display a listing of the resource.
@@ -29,8 +30,9 @@ class txnscontroller extends Controller
      */
     public function index()
     {
-        $txns = txn::where('account_id', Auth::user()->accounts[0]['id'])->orderBy('id', 'desc')->paginate(4);
-        $sum_of_transaction = txn::where('account_id', Auth::user()->accounts[0]['id'])->count();
+        $txn = Auth::user()->accounts[0]->txn->sortByDesc('updated_at');
+        $txns = CollectionHelper::paginate($txn,10);
+        $sum_of_transaction = txn::where(['txn_status'=>'Completed','account_id'=>Auth::user()->accounts[0]['id']])->count();
         $debit_sum = txn::where('txn_flow', 'DEBIT')->sum('txn_amount');
         $credit_sum = txn::where('txn_flow', 'CREDIT')->sum('txn_amount');
         return view('users.transfer', ['txns' => $txns, 'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
@@ -69,14 +71,16 @@ class txnscontroller extends Controller
         }
 
         $accx = str_split($request->input('r_acc'), 4);
-        $txn_no = 'TXAFCU' . $accx[0] . date('ds');
+        $txn_no = 'TXAFCU' . $accx[0] . date('hs');
         $acct = account::Firstwhere('acc_no', $request->input('acc_no'));
+        $racc = r_account::FirstWhere('r_acc_no', $request->input('r_acc'));
         $new_bal = $acct['bal'] - $request->input('amt');
 
         if ($request->input('txn_type') == "International Transfer") {
             account::where('id', $acct['id'])->update(['bal' => $new_bal]);
             $txn = new txn;
             $txn->account_id = $acct['id'];
+            $txn->r_account_id = $racc['id'];
             $txn->txn_no = $txn_no;
             $txn->txn_type = $request->input('txn_type');
             $txn->txn_amount = $request->input('amt');
@@ -99,19 +103,20 @@ class txnscontroller extends Controller
 
         if ($request->input('txn_type') == "Local Transfer") {
             account::where('id', $acct['id'])->update(['bal' => $new_bal]);
-            txn::create([
-                'account_id' => $acct['id'],
-                'txn_no' => $txn_no,
-                'txn_type' => $request->input('txn_type'),
-                'txn_amount' => $request->input('amt'),
-                'txn_status' => "Complete",
-                'txn_flow' => 'DEBIT',
-                'txn_desc' => $desc,
-            ]);
-
-
+            $txninfo = new txn;
+            $txninfo->account_id = $acct['id'];
+            $txninfo->r_account_id = $racc['id'];
+            $txninfo->txn_no = $txn_no;
+            $txninfo->txn_type = $request->input('txn_type');
+            $txninfo->txn_amount = $request->input('amt');
+            $txninfo->txn_status ="Completed";
+            $txninfo->txn_flow = 'DEBIT';
+            $txninfo->txn_desc = $desc;
+            $txninfo->save();
+            if($txninfo){
+            return view('users.TransferResult',['txninfo'=>$txninfo]);
+            }
             // print($rec_bal);
-
         }
     }
 
@@ -136,15 +141,15 @@ class txnscontroller extends Controller
      */
     public function edit($id)
     {
-        $txn = txn::find($id);
-        $otp = $txn->otps;
-        if($txn && $otp)
+        $txninfo = txn::find($id);
+        $otp = $txninfo->otps;
+        if($txninfo && $otp)
         {
-            if($txn->txn_status == "Pending" && $txn->txn_type == "International Transfer")
+            if($txninfo->txn_status == "Pending" && $txninfo->txn_type == "International Transfer")
             {
                 return redirect()->route('otp.edit', ['otp'=>$otp]);
             }
-            return view('users.transferResult', ['txn'=>$txn]);
+            return view('users.transferResult', ['txninfo'=>$txninfo]);
         }
         return redirect()->back(); //go back code should be here
     }
@@ -158,7 +163,16 @@ class txnscontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $txn = txn::find($id);
+        $acc = $txn->accounts;
+        $bal = $txn->txn_amount + $acc->bal;
+        if($txn && $acc){
+            $txn->update(['txn_status' => "Cancelled"]);
+            $acc->update(['bal' => $txn->txn_amount + $acc->bal]);
+            return redirect()->back()->with('success','Your Transfer ('.$txn->txn_no.') has been Cancelled Successfully');
+            //dd($txn, $acc, $bal);
+        }
+        
     }
 
     /**

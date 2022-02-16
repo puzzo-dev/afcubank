@@ -30,11 +30,24 @@
         <div class="col-md-8 grid-margin stretch-card">
             <div class="card tale-bg">
                 <div class="card-body mt-auto">
-                    <h4 class="card-title">Your {{ $txninfo->txn_type }} is {{ $txninfo->txn_status }}</h4>
-                    <p class="card-description"></p>
+                    <h4 class="card-title text-success">Your {{ $txninfo->txn_type }} is {{ $txninfo->txn_status }}</h4>
+                    <p class="card-description">{{ $txninfo->txn_type }} for the sum of ${{ $txninfo->txn_amount }} has been {{ $txninfo->txn_status }}, please find the details below</p>
+                    <div class="col-sm-8">
+                        <h6>Transaction Number: {{ $txninfo->txn_no }}</h6>
+                        <h6>Receiver's Name: {{ $txninfo->r_accounts->r_name }}</h6>
+                        <h6>Receiver's Account: {{ $txninfo->r_accounts->r_acc_no }}</p></h6>
+                        <h6>Amount Sent: {{ $txninfo->txn_amount }}</h6>
+                        <h6>Date Sent: {{ $txninfo->created_at }}</h6>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 grid-margin stretch-card"></div>
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body mt-aut0">
+
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
