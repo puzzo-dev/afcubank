@@ -1,7 +1,7 @@
 @extends('users.layouts.app')
 @section('content')
-@if (session('error'))
-<div class="alert alert-danger">{{ session('error') }}</div>
+@if (session('success'))
+<div class="alert alert-success">{{ session('success') }}</div>
 @endif
     <div class="row">
         <div class="col-md-12 grid-margin">
@@ -55,7 +55,7 @@
                         @if ($kycstatus == 'Not Activated')
                             <li class="text-danger">Submit your KYC Details Using the Form Below</li>
                         @else
-                            <li class="text-warning">Kyc has been accepted and is Under Review</li>
+                            <li class="text-primary">Kyc has been accepted and is Under Review</li>
                         @endif
                         {{-- @endforelse --}}
                     </ul>
@@ -71,9 +71,9 @@
                     <h4 class="card-title">KYC Activation</h4>
                     <p class="card-description">Activate Your KYC on this page</p>
                     @if ($kycstatus == 'Not Activated')
-                        <li class="text-danger">Submit your KYC Details Using the Form Below</li>
+                        <p class="card-description text-danger">Submit your KYC Details Using the Form Below</p>
                     @else
-                        <li class="text-warning">Kyc has been accepted and is Under Review</li>
+                        <p class="card-description text-primary">KYC has been accepted and is Under Review</p>
                     @endif
                     <form action="{{ route('kyc.store') }}" class="forms-sample" style="display:{{ $class }}"
                         id="transfer" Method="POST" enctype="multipart/form-data">
@@ -102,13 +102,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <button class="btn btn-outline-primary mr-2" href="#">Transfer</button>
+                        <button class="btn btn-outline-primary mr-2" href="#">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
         <div class="col-md-4 grid-margin stretch-card">
-            <div class="card">
+            <div class="card bg-primary">
                 <div class="card-body">
 
                 </div>

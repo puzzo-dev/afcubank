@@ -1,5 +1,8 @@
 @extends('users.layouts.app')
 @section('content')
+@if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
 <div class="row">
 <div class="col-md-12 grid-margin">
      <div class="row">
@@ -34,7 +37,7 @@
                         <li>Account Type: {{ $account['acc_type'] ?? ''}}</li>
                         <li>Account No: {{ $account['acc_no']}}</li>
                         <li>Account Name: {{ Auth::user()->f_name }} {{ Auth::user()->l_name }}</li>
-                        <li class="text-danger">Account Balance:  ${{ $account['bal']}}</li>
+                        <li class="text-danger">Account Balance:  ${{ number_format($account['bal'],2)}}</li>
                         @empty
                         <li>This User Doesn't Have an Account</li>
                         @endforelse
@@ -68,16 +71,16 @@
                                     <tr class="grid-margin">
                                         @if($txn->txn_flow == "DEBIT")
                                         <td>
-                                            <i class="ti-arrow-top-right menu-icon text-primary"></i>
+                                            <i class="ti-arrow-top-right menu-icon text-danger"></i>
                                         </td>
                                         @else
                                         <td>
-                                            <i class="ti-arrow-down-left menu-icon text-danger"></i>
+                                            <i class="ti-arrow-down-left menu-icon text-primary"></i>
                                         </td>
                                         @endif
                                         <td>{{ $txn->r_accounts->r_acc_no}}</td>
                                         <td>{{ $txn->txn_no }}</td>
-                                        <td>$ {{ $txn->txn_amount }}</td>
+                                        <td>$ {{ number_format($txn->txn_amount,2) }}</td>
                                         {{-- <td class="text-wrap">{{ $txn->txn_desc }}</td> --}}
                                         <td class="text-wrap">{{ $txn->txn_desc }} on {{ date('d-m-Y', strtotime($txn->created_at)) }}</td>
                                         @if ($txn->txn_type == 'Local Transfer')

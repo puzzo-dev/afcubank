@@ -28,8 +28,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-9 grid-margin stretch-card">
-            <div class="card grid-margin ">
+        <div class="col-md-8 grid-margin stretch-card">
+            <div class="card">
                 <div class="card-body">
                     <h3 class="font-weight-bold">Profile Settings</h3>
                     <h6 class="font-weight-normal mb-0">Change Profile Settings on this page.</h6>
@@ -39,13 +39,16 @@
                                 <a href="#pin" class="nav-link active" data-bs-toggle="tab">Change Pin</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#password" class="nav-link" data-bs-toggle="tab">Chaneg Password</a>
+                                <a href="#password" class="nav-link" data-bs-toggle="tab">Change Password</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#User-Activities" class="nav-link" data-bs-toggle="tab">User Activities</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="pin">
-                                <h4 class="mr-2">Change Pin Here</h4>
-                                <form action="{{ route('accusers.update', Auth::user()->id) }}" medthod="POST" id="pinform">
+                                <h4 class="card-title">Change Pin Here</h4>
+                                <form action="{{ route('accusers.update', Auth::user()->id) }}" id="pinform">
                                     @csrf
                                     <div class="row form-group">
                                         <label class="col-md-3" for="Old Pin">Old Pin</label>
@@ -68,7 +71,7 @@
 
                             </div>
                             <div class="tab-pane fade" id="password">
-                                <h4 class="mt-2">Change Password Here</h4>
+                                <h4 class="card-title">Change Password Here</h4>
                                 <form action="#" medthod="POST" id="passwordform">
                                     @csrf
                                     <div class="row form-group">
@@ -92,13 +95,17 @@
                                     </div>
                                 </form>
                             </div>
+                            <div class="tab-pane fade" id="User-Activities">
+                                <h4 class="card-title">User Acivities</h4>
+            
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 grid-margin stretch-card">
-            <div class="card grid-margin">
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card bg-primary">
                 <div class="card-body">
 
 

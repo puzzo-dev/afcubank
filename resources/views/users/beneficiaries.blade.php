@@ -154,7 +154,7 @@
             </div>
         </div>
         <div class="col-md-4 grid-margin stretch-card">
-            <div class="card">
+            <div class="card bg-primary">
                 <div class="card-body">
 
                 </div>

@@ -29,4 +29,15 @@ class HomeController extends Controller
         $txns = collect($txn)->sortByDesc('id');
         return view('home',['txns'=>$txns]);
     }
+
+    /**
+    * Show the admin dashboard.
+    *
+    * @return \Illuminate\Contracts\Support\Renderable
+    */
+
+    public function adminHome(Request $request)
+    {
+    return view('admin.wel');
+    }
 }

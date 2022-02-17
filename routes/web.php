@@ -8,6 +8,7 @@ use App\Http\Controllers\recipientController;
 use App\Http\Controllers\kycController;
 use App\Http\Controllers\otpController;
 use App\Http\Controllers\notificationController;
+use App\Http\Middleware\isAdmin;
 // use
 
 /*
@@ -38,4 +39,5 @@ Route::resource('/beneficiaries', recipientController::class);
 Route::resource('/kyc', kycController::class);
 Route::resource('/otp', otpController::class);
 Route::resource('/notifications', notificationController::class);
+Route::get('/admin',[HomeController::class,'adminHome'])->name('admin')->middleware('is_admin');
 

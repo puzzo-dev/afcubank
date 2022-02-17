@@ -81,16 +81,14 @@ class kycController extends Controller
         $kyc->status = 0;
         if($kyc->id_proof && $kyc->address_proof)
         {
-            try {
             $kyc->id_proof = $this->UserImageUpload($kyc->id_proof); //Passing $query to our image upload trait
             $kyc->address_proof = $this->UserImageUpload($kyc->address_proof);
             $kyc->save();
-            return redirect()->back();
-        } catch (Exception $e) {
-            return back()->withError($e->getMessage())->withInput();
-        }
+            return redirect()->back()->with('success','KYC Documents Have been Accepted and under Review');
+        } 
+        
     }
-}
+
 
     /**
      * Display the specified resource.

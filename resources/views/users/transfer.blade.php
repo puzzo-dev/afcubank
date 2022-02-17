@@ -53,7 +53,7 @@
                             <li>Total Number of Transfer: {{ $sum_of_transaction }}</li>
                             <li>Total Incoming Funds: ${{ $credit_sum }}</li>
                             <li>Total Outgoing Funds: ${{ $debit_sum }}</li>
-                            <li class="text-danger">Current Balance: ${{ $account['bal'] }}</li>
+                            <li class="text-danger">Current Balance: ${{ number_format($account['bal'],2) }}</li>
                         @empty
                             <li>This User Doesn't Have an Account</li>
                         @endforelse
@@ -106,7 +106,7 @@
                                         @endif
                                         <td>{{ $txn->r_accounts->r_acc_no}}</td>
                                         <td>{{ $txn->txn_no }}</td>
-                                        <td>$ {{ $txn->txn_amount }}</td>
+                                        <td>$ {{ number_format($txn->txn_amount,2) }}</td>
                                         {{-- <td class="text-wrap">{{ $txn->txn_desc }}</td> --}}
                                         <td class="text-wrap">{{ $txn->txn_desc }} on
                                             {{ date('d-m-Y', strtotime($txn->created_at)) }}</td>
@@ -248,7 +248,7 @@
             </div>
         </div>
         <div class="col-md-4 grid-margin stretch-card">
-            <div class="card">
+            <div class="card bg-primary">
                 <div class="card-body">
 
                 </div>
