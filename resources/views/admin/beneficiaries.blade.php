@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('content')
-@forelse($kyc as $ky)
-<p>{{ $ky }}</p>
+@forelse($users as $user)
+<p>{{ $user }}</p>
 @empty
 <p>No KYC Added Yet</p>
 @endforelse
-{{ $kyc->links() }}
+{{ $users->links() }}
 @endsection

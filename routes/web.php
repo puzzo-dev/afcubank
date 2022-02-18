@@ -43,5 +43,5 @@ Route::resource('/beneficiaries', recipientController::class);
 Route::resource('/kyc', kycController::class);
 Route::resource('/otp', otpController::class);
 Route::resource('/notifications', notificationController::class);
-Route::get('/admin',[adminController::class])->name('admin');
+Route::resource('/admin', adminController::class);
 Route::resource('/settings', sitesettingsController::class);

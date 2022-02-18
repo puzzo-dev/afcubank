@@ -1,4 +1,4 @@
 @extends('admin.layouts.app')
 @section('content')
-<h4>User Dashboard</h4>
+<h4>User Notification</h4>
 @endsection

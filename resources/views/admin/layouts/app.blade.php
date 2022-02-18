@@ -38,7 +38,7 @@
      </div>
 
 <!-- plugins:js -->
-@include('users.layouts.footer-scripts')
+@include('admin.layouts.footer-scripts')
 <!-- End custom js for this page-->
 </body>
 

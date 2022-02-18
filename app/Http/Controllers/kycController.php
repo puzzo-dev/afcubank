@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Traits\ImageUpload;
 use App\Models\kyc;
 use Illuminate\Http\Request;
+use App\Helpers\General\CollectionHelper;
 use Illuminate\Support\Facades\Auth;
 
 class kycController extends Controller
@@ -33,7 +34,8 @@ class kycController extends Controller
 
         if($user->is_admin == 1)
         {
-            $kyc = kyc::all();
+            $kycs = kyc::all()->sortByDesc('updated_at');
+            $kyc = CollectionHelper::paginate($kycs,5);
             return view('admin.kyc',['kyc'=>$kyc]);
         }
 

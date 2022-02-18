@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\r_account;
+use App\Helpers\General\CollectionHelper;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\uniqueReceiver;
 
@@ -26,6 +27,13 @@ class recipientController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_admin == 1){
+
+            $user = r_account::all();
+            $users = CollectionHelper::paginate($user,5);
+            return view('admin.beneficiaries',['users'=>$users]);
+
+        }
         //$user = Auth::user()->r_accounts;
         $user = r_account::where('account_id', Auth::user()->accounts[0]['id'])->paginate(4);
         //dd($user);
@@ -120,7 +128,7 @@ class recipientController extends Controller
     public function destroy($id)
     {
          $racc = r_account::find($id);
-        
+
          if($racc == NULL){
              return redirect()->back()->with('failure','Beneficiary was not found');
          }
@@ -131,7 +139,7 @@ class recipientController extends Controller
          }
 
          return redirect()->back()->with('failure','Beneficiary is not yours');
-         
-         
+
+
     }
 }

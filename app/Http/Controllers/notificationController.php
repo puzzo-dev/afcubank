@@ -22,6 +22,12 @@ class notificationController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_admin == 1)
+        {
+
+            return view('admin.notifications');
+
+        }
         return view('users.notifs');
     }
 

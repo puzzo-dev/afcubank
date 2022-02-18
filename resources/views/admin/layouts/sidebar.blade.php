@@ -2,7 +2,7 @@
     <div class="sidebar flex-column position-fixed">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('admin.index') }}">
               <i class="ti-dashboard menu-icon"></i>
               <span class="menu-title">Banking Metrics</span>
             </a>
@@ -48,6 +48,12 @@
             </div>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('beneficiaries.index') }}">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">All Beneficiaries</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
               <i class="ti-envelope menu-icon"></i>
               <span class="menu-title">Notifications</span>
@@ -55,14 +61,14 @@
             </a>
             <div class="collapse" id="error">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link text-wrap" href="#">View Notifications</a></li>
+                <li class="nav-item"> <a class="nav-link text-wrap" href="{{ route('notifications.index') }}">View Notifications</a></li>
                 <li class="nav-item"> <a class="nav-link text-wrap" href="#">Create Notifications </a></li>
                 <li class="nav-item"> <a class="nav-link text-wrap" href="#">User Notifications </a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('kyc.index') }}">
               <i class="ti-id-badge menu-icon"></i>
               <span class="menu-title">KYC</span>
             </a>
@@ -71,12 +77,6 @@
             <a class="nav-link" href="{{ route('settings.index')}}">
               <i class="ti-settings menu-icon"></i>
               <span class="menu-title">Master Settings</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">#</span>
             </a>
           </li>
         </ul>
