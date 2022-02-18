@@ -93,10 +93,10 @@ class userscontroller extends Controller
     {
         $user = user::find($id);
         dd(auth()->user());
-        if(auth()->user()->is_admin == 1){
-           return view('admin.settings')->with('user',$user);
-        }
-        return view('users.settings')->with('user',$user);
+        // if(auth()->user()->is_admin == 1){
+        //    return view('admin.settings')->with('user',$user);
+        // }
+        // return view('users.settings')->with('user',$user);
         //dd($id);
     }
 
