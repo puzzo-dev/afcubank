@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\account;
 
 class accountscontroller extends Controller
 {
@@ -22,7 +23,15 @@ class accountscontroller extends Controller
      */
     public function index()
     {
-        //
+        $acct = auth()->user()->accounts;
+        if(auth()->user()->is_admin==1)
+        {
+            $acct = account::all();
+            return view('admin.accounts',['acct'=>$acct]);
+        }
+        return view('users.account',['acct'=>$acct]);
+
+
     }
 
     /**

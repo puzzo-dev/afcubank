@@ -78,7 +78,7 @@
                                             <i class="ti-arrow-down-left menu-icon text-primary"></i>
                                         </td>
                                         @endif
-                                        <td>{{ $txn->r_accounts->r_acc_no}}</td>
+                                        <td>{{ $txn->r_accounts->r_acc_no ?? '[Beneficiary Deleted]'}}</td>
                                         <td>{{ $txn->txn_no }}</td>
                                         <td>$ {{ number_format($txn->txn_amount,2) }}</td>
                                         {{-- <td class="text-wrap">{{ $txn->txn_desc }}</td> --}}

@@ -15,8 +15,8 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">View All Users</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">View All Accounts</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('accusers.index') }}">View All Users</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('account.index') }}">View All Accounts</a></li>
               </ul>
             </div>
           </li>
@@ -28,8 +28,8 @@
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item text-wrap"><a class="nav-link text-wrap" href="#">View All Transactions</a></li>
-                <li class="nav-item text-wrap"><a class="nav-link text-wrap" href="#">View All OTP Transactions</a></li>
+                <li class="nav-item text-wrap"><a class="nav-link text-wrap" href="{{ route('txns.index') }}">View All Transactions</a></li>
+                <li class="nav-item text-wrap"><a class="nav-link text-wrap" href="{{ route('otp.index') }}">View All OTP Transactions</a></li>
               </ul>
             </div>
           </li>
@@ -68,7 +68,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('accusers.edit',auth()->user()) }}">
+            <a class="nav-link" href="{{ route('settings.index')}}">
               <i class="ti-settings menu-icon"></i>
               <span class="menu-title">Master Settings</span>
             </a>

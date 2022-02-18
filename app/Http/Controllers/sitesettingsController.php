@@ -3,22 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\txn;
-use App\Models\otp;
-use App\Rules\taxcodeCheck;
-use App\Helpers\General\CollectionHelper;
+use App\Models\sitesettings;
 
-class otpController extends Controller
+class sitesettingsController extends Controller
 {
-    /**
+     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware(['auth','verified']);
-    }
+     public function __construct()
+     {
+     $this->middleware(['auth','verified','is_admin']);
+     }
     /**
      * Display a listing of the resource.
      *
@@ -26,13 +23,9 @@ class otpController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->is_admin == 1)
-        {
-            $otps = otp::all();
-            $otp = CollectionHelper::paginate($otps,20);
-            return view('admin.otp',['otp'=>$otp]);
-        }
-        return redirect()->route('txns.index');
+        $user = auth()->user();
+        $settings = sitesettings::get();
+        return view('admin.settings',['user'=>$user,'settings'=>$settings]);
     }
 
     /**
@@ -75,12 +68,7 @@ class otpController extends Controller
      */
     public function edit($id)
     {
-        $otp = otp::find($id);
-        if($otp){
-            return view('users.otp',['id'=>$id]);
-        }
-        return redirect()->back();
-
+        //
     }
 
     /**
@@ -92,15 +80,7 @@ class otpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request);
-        $this->validate($request,[
-            'taxcode'=>['required', new taxcodeCheck(),'max:6'],
-        ]);
-        $otp = otp::find($id);
-        txn::where('id',$otp->txn_id)->update(['txn_status'=>"Completed"]);
-        $txninfo = txn::find($otp->txn_id);
-        $this->destroy($id);
-        return view('users.TransferResult',['txninfo'=>$txninfo]);
+        //
     }
 
     /**
@@ -111,7 +91,6 @@ class otpController extends Controller
      */
     public function destroy($id)
     {
-        $otp = otp::find($id)->delete();
-        return $otp;
+        //
     }
 }

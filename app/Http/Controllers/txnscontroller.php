@@ -30,12 +30,24 @@ class txnscontroller extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_admin==1)
+        {
+        $txn = txn::all()->sortByDesc('updated_at');
+        $txns = CollectionHelper::paginate($txn,20);
+        //dd($txns);
+        $sum_of_transaction = txn::all()->sum('txn_amount');
+        $debit_sum = txn::where('txn_flow','DEBIT')->sum('txn_amount');
+        $credit_sum = txn::where('txn_flow','CREDIT')->sum('txn_amount');
+        return view('admin.transactions',['txns' => $txns, 'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum,'sum_of_transaction' => $sum_of_transaction]);
+        }
+
         $txn = Auth::user()->accounts[0]->txn->sortByDesc('updated_at');
         $txns = CollectionHelper::paginate($txn,10);
         $sum_of_transaction = txn::where(['txn_status'=>'Completed','account_id'=>Auth::user()->accounts[0]['id']])->count();
-        $debit_sum = txn::where('txn_flow', 'DEBIT')->sum('txn_amount');
-        $credit_sum = txn::where('txn_flow', 'CREDIT')->sum('txn_amount');
+        $debit_sum = txn::where(['txn_flow'=>'DEBIT','account_id'=>Auth::user()->accounts[0]['id']])->sum('txn_amount');
+        $credit_sum = txn::where(['txn_flow'=>'CREDIT','account_id'=>Auth::user()->accounts[0]['id']])->sum('txn_amount');
         return view('users.transfer', ['txns' => $txns, 'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum, 'sum_of_transaction' => $sum_of_transaction]);
+
     }
 
     /**
@@ -172,7 +184,7 @@ class txnscontroller extends Controller
             return redirect()->back()->with('success','Your Transfer ('.$txn->txn_no.') has been Cancelled Successfully');
             //dd($txn, $acc, $bal);
         }
-        
+
     }
 
     /**

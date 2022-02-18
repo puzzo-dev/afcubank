@@ -28,10 +28,16 @@ class kycController extends Controller
     {
         $user = Auth::user();
         $userkyc = $user->kyc;
-        $kycstatus = NULL;
+        $kycstatus = $userkyc->status;
         $class = NULL;
 
-        if(!empty($userkyc) && $kycstatus == 1)
+        if($user->is_admin == 1)
+        {
+            $kyc = kyc::all();
+            return view('admin.kyc',['kyc'=>$kyc]);
+        }
+
+        if(!empty($userkyc) && $kycstatus)
         {
             $kycstatus = 'Activated';
             $class = 'none';
@@ -41,7 +47,7 @@ class kycController extends Controller
             $kycstatus = 'Not Activated';
             $class = 'block';
         }
-        if(!empty($userkyc) && $kycstatus == 0)
+        if(!empty($userkyc) && !$kycstatus)
         {
             $kycstatus = 'Under Review';
             $class = 'none';
@@ -85,8 +91,8 @@ class kycController extends Controller
             $kyc->address_proof = $this->UserImageUpload($kyc->address_proof);
             $kyc->save();
             return redirect()->back()->with('success','KYC Documents Have been Accepted and under Review');
-        } 
-        
+        }
+
     }
 
 

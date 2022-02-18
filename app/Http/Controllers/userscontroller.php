@@ -24,6 +24,11 @@ class userscontroller extends Controller
      */
     public function index()
     {
+        if(auth()->user()->is_admin == 1)
+        {
+            $users = user::all();
+            return view('admin.users',['users'=>$users]);
+        }
         return view('users.welcome');
     }
 
@@ -92,11 +97,11 @@ class userscontroller extends Controller
     public function show($id)
     {
         $user = user::find($id);
-        dd(auth()->user());
-        // if(auth()->user()->is_admin == 1){
-        //    return view('admin.settings')->with('user',$user);
-        // }
-        // return view('users.settings')->with('user',$user);
+        //dd(auth()->user());
+        if(auth()->user()->is_admin == 1){
+           return view('admin.viewuser')->with('user',$user);
+        }
+        return view('users.settings')->with('user',$user);
         //dd($id);
     }
 
@@ -111,7 +116,10 @@ class userscontroller extends Controller
         $user = user::find($id);
         if($user)
         {
-        return view('users.settings',['id'=>$id]);
+            if(auth()->user()->is_admin == 1){
+            return view('admin.edituser')->with('user',$user);
+            }
+        return view('users.settings',['user'=>$user]);
         }
         //Go back code should be here
     }

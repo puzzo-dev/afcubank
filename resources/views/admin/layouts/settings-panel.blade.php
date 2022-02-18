@@ -1,4 +1,5 @@
 <div class="theme-setting-wrapper">
+    {{ $user }} {{ $settings }}
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
