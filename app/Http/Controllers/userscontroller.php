@@ -92,7 +92,7 @@ class userscontroller extends Controller
     public function show($id)
     {
         $user = user::find($id);
-        dd($id);
+        dd(auth()->user());
         if(auth()->user()->is_admin == 1){
            return view('admin.settings')->with('user',$user);
         }

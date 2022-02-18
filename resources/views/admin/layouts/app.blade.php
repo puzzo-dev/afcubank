@@ -24,14 +24,14 @@
 <body>
      <!-- container-scroller Start -->
      <div class="container-scroller">
-          @include('users.layouts.navbar')
+          @include('admin.layouts.navbar')
           <div class="container-fluid page-body-wrapper">
-               @include('users.layouts.sidebar')
+               @include('admin.layouts.sidebar')
                <div class="main-panel">
                     <div class="content-wrapper">
                          @yield('content')
                     </div>
-                    @include('users.layouts.footer')
+                    @include('admin.layouts.footer')
                </div>
           </div>
      <!-- container-scroller End -->
