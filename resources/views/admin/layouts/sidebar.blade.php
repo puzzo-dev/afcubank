@@ -15,6 +15,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{ route('register') }}">Create New User</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('accusers.index') }}">View All Users</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('account.index') }}">View All Accounts</a></li>
               </ul>

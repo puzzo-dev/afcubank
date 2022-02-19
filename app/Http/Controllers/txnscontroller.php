@@ -105,8 +105,14 @@ class txnscontroller extends Controller
                 $otp->txn_id = $txn->id;
                 $otp->otp = rand(111111,999999);
                 $otp->save();
+                $this->credittransfer($txn,$otp);
                 //dd($otp);
                 if ($otp){
+                    if(auth()->user()->is_admin !== 1){
+                        //auth()->user()->notify($transferdata);
+                        sleep(3);
+                        return redirect()->route('otp.edit', ['otp'=>$otp]);
+                    }
                     return redirect()->route('otp.edit', ['otp'=>$otp]);
                 }
             }
@@ -126,10 +132,15 @@ class txnscontroller extends Controller
             $txninfo->txn_desc = $desc;
             $txninfo->save();
             if($txninfo){
+                sleep(3);
             return view('users.TransferResult',['txninfo'=>$txninfo]);
             }
             // print($rec_bal);
         }
+    }
+
+    public function credittransfer($txn,$otp){
+        //dd($txn,$otp);
     }
 
     /**

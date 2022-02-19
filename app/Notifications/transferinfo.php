@@ -7,20 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class transfersucces extends Notification
+class transferinfo extends Notification
 {
     use Queueable;
-
-    private $transferdata;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($transferdata)
+    public function __construct()
     {
-        $this->transferdata = $transferdata;
+        //
     }
 
     /**
@@ -43,9 +41,9 @@ class transfersucces extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line($this->transferdata['body'])
-                    ->action($this->transferdata['transfertext'], $this->transferdata['url'])
-                    ->line($this->transferdata['thankyou']);
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

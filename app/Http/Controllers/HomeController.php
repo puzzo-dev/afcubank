@@ -27,7 +27,12 @@ class HomeController extends Controller
         //$user = txn::where('account_id', Auth::user()->accounts[0]['id'])->paginate(4);
         $txn = Auth::user()->txns->take(-4);
         $txns = collect($txn)->sortByDesc('id');
-        return view('home',['txns'=>$txns]);
+        if(auth()->user()->is_admin == 1){
+
+            return redirect()->route('admin.index');
+
+        }
+        return view('users.home',['txns'=>$txns]);
     }
 
     /**
@@ -35,9 +40,4 @@ class HomeController extends Controller
     *
     * @return \Illuminate\Contracts\Support\Renderable
     */
-
-    public function adminHome(Request $request)
-    {
-    return view('admin.wel');
-    }
 }

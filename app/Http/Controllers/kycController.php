@@ -29,7 +29,7 @@ class kycController extends Controller
     {
         $user = Auth::user();
         $userkyc = $user->kyc;
-        $kycstatus = $userkyc->status;
+        $kycstatus = $userkyc->status ?? NULL;
         $class = NULL;
 
         if($user->is_admin == 1)
