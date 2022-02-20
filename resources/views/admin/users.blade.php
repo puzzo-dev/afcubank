@@ -1,4 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-{{ $users }}
+<div class="row">
+    
+</div>
 @endsection

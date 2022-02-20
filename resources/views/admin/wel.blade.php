@@ -94,7 +94,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-7 grid-margin stretch-card">
+    <div class="col-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Last 4 Registered User</h6>
@@ -110,7 +110,7 @@
                         <tbody>
                             @forelse($data['l4user'] as $user)
                             <tr>
-                                <td>{{ $user->f_name }} {{ $user->l_name }}</td>
+                                <td>{{ $user->f_name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
                                 @empty
@@ -123,7 +123,7 @@
             </div>
         </div>
     </div>
-    <div class="col-5 grid-margin stretch-card">
+    <div class="col-6 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Last 4 Added Beneficiaries</h6>
