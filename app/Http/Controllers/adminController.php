@@ -1,9 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\txn;
+use App\Models\account;
+use App\Models\kyc;
 class adminController extends Controller
 {
     /**
@@ -25,7 +27,30 @@ class adminController extends Controller
     */
     public function index()
     {
-        return view('admin.wel');
+        $users = user::all()->count();
+        $kyc = kyc::all()->count();
+        $kycactive = kyc::where('status',1)->count();
+        $txn = txn::all()->count();
+        $activeusers = account::where('active',1)->count();
+        $ctxn = txn::where('txn_flow','CREDIT')->count();
+        $dtxn = txn::where('txn_flow','DEBIT')->count();
+        $tbal = account::all()->sum('bal');
+        $abal = account::find(auth()->user()->accounts[0]['id'])->bal;
+        $cbal = $tbal-$abal;
+        $data = [
+            'users'=>$users,
+            'txn'=>$txn,
+            'activeusers'=>$activeusers,
+            'tbal'=>$tbal,
+            'abal'=>$abal,
+            'cbal'=>$cbal,
+            'dtxn'=>$dtxn,
+            'ctxn'=>$ctxn,
+            'kyc'=>$kyc,
+            'kycactive'=>$kycactive
+        ];
+        //dd($data);
+        return view('admin.wel',['data'=>$data]);
     }
 
     /**
