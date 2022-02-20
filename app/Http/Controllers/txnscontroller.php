@@ -33,9 +33,9 @@ class txnscontroller extends Controller
         if(auth()->user()->is_admin==1)
         {
         $txn = txn::all()->sortByDesc('updated_at');
-        $txns = CollectionHelper::paginate($txn,20);
+        $txns = CollectionHelper::paginate($txn,10);
         //dd($txns);
-        $sum_of_transaction = txn::all()->sum('txn_amount');
+        $sum_of_transaction = txn::all()->count();
         $debit_sum = txn::where('txn_flow','DEBIT')->sum('txn_amount');
         $credit_sum = txn::where('txn_flow','CREDIT')->sum('txn_amount');
         return view('admin.transactions',['txns' => $txns, 'debit_sum' => $debit_sum, 'credit_sum' => $credit_sum,'sum_of_transaction' => $sum_of_transaction]);

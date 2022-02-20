@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Traits\ImageUpload;
+use App\Models\User;
 use App\Models\kyc;
 use Illuminate\Http\Request;
 use App\Helpers\General\CollectionHelper;
@@ -32,12 +33,12 @@ class kycController extends Controller
         $kycstatus = $userkyc->status ?? NULL;
         $class = NULL;
 
-        if($user->is_admin == 1)
-        {
-            $kycs = kyc::all()->sortByDesc('updated_at');
-            $kyc = CollectionHelper::paginate($kycs,5);
-            return view('admin.kyc',['kyc'=>$kyc]);
-        }
+        // if($user->is_admin == 1)
+        // {
+        //     $kycs = kyc::all()->sortByDesc('updated_at');
+        //     $kyc = CollectionHelper::paginate($kycs,5);
+        //     return view('admin.kyc',['kyc'=>$kyc]);
+        // }
 
         if(!empty($userkyc) && $kycstatus)
         {
@@ -53,6 +54,19 @@ class kycController extends Controller
         {
             $kycstatus = 'Under Review';
             $class = 'none';
+        }
+        if($user->is_admin == 1)
+        {
+        $users = user::all()->count();
+        $kycs = kyc::all()->sortByDesc('updated_at');
+        $ckycs = kyc::all()->count();
+        $akycs = kyc::where('status',1)->count();
+        $pkycs = $ckycs - $akycs;
+        $nkycs = $users - $ckycs;
+        $kyc = CollectionHelper::paginate($kycs,5);
+        return
+        view('admin.kyc',['nkycs'=>$nkycs,'pkycs'=>$pkycs,'akycs'=>$akycs,'ckycs'=>$ckycs,'user'=>$user,'kyc'=>$kyc,
+        'kycstatus'=>$kycstatus]);
         }
         //dd($kycstatus);
 

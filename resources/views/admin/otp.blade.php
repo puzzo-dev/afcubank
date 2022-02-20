@@ -29,11 +29,51 @@
             </div>
         </div>
     </div>
-    <div class="row"></div>
-@forelse($otp as $ot)
-<p>{{ $ot }}</p>
-@empty
-<p>No OTP Transactions</p>
-@endforelse
-{{ $otp->links() }}
+    <div class="row">
+        <div class="col-md-12 mt-4 stretch-card transpatent">
+            <div class="col-md-3 grid-margin text-light">
+                <div class="card bg-primary">
+                    <div class="card-body">
+                        <p class="mb-4">No Of OTP Txn</p>
+                        <p class="h3 mb-4">{{ $data['otp']->count() }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="bg-primary text-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Transaction ID</th>
+                                    <th>OTP No</th>
+                                    <th>Created On</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($data['otp'] as $otp)
+                                <tr>
+                                    <td>{{ $otp->id }}</td>
+                                    <td><a href="{{ route('txns.show',$otp->txn_id) }}">{{ $otp->txn_id }}</a></td>
+                                    <td>{{ $otp->otp }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($otp->created_at)) }}</td>
+                                    <td><a class="text-primary" href="#">edit</a><hr><a class="text-danger" href="">delete</a></td>
+                                    @empty
+                                    <td>Empty</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                            {{$data['otp']->links() }}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

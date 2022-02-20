@@ -93,7 +93,7 @@
                     <div class="card card-tale">
                         <div class="card-body">
                             <p class="mb-4">No of Credit Transaction</p>
-                            <p class="fs-30 mb-2">{{ $data['ctxn'] }}</p>
+                            <p class="fs-30 mb-2">{{ ($data['ctxn']) }}</p>
                         </div>
                     </div>
                 </div>
@@ -104,11 +104,11 @@
                 <div class="card-body">
                     <h6 class="card-title">Accounts Stats</h6>
                     <p class="mb-4">Total Customers Balance</p>
-                    <p class="fs-30 mb-4">{{ number_format($data['cbal'], 2) }}</p>
+                    <p class="h3 mb-4">${{ number_format($data['cbal'], 2) }}</p>
                     <p class="mb-4">Admin Balance</p>
-                    <p class="fs-30 mb-4">{{ number_format($data['abal'], 2) }}</p>
+                    <p class="h3 mb-4">${{ number_format($data['abal'], 2) }}</p>
                     <p class="mb-4">Total Book Balance</p>
-                    <p class="fs-30 mb-4">{{ number_format($data['tbal'], 2) }}</p>
+                    <p class="text-primary fs-30 mb-4">${{ number_format($data['tbal'], 2) }}</p>
                 </div>
             </div>
         </div>

@@ -29,9 +29,10 @@ class recipientController extends Controller
     {
         if(auth()->user()->is_admin == 1){
 
-            $user = r_account::all();
-            $users = CollectionHelper::paginate($user,5);
-            return view('admin.beneficiaries',['users'=>$users]);
+            $benes = r_account::all();
+            $bene = CollectionHelper::paginate($benes,5);
+            $data = ['bene'=>$bene];
+            return view('admin.beneficiaries',['data'=>$data]);
 
         }
         //$user = Auth::user()->r_accounts;

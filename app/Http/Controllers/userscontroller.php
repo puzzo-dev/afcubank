@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\account;
+use App\Models\kyc;
+use App\Helpers\General\CollectionHelper;
 use Illuminate\Support\Facades\Hash;
 
 class userscontroller extends Controller
@@ -26,10 +29,15 @@ class userscontroller extends Controller
     {
         if(auth()->user()->is_admin == 1)
         {
-            $users = user::all();
-            return view('admin.users',['users'=>$users]);
+            $us = user::all()->sortByDesc('created_at');
+            $users = CollectionHelper::paginate($us,20);
+            $user =  account::where('active',1)->count();
+            $kyc = kyc::where('status',1)->count();
+            $kycs = kyc::all()->count();
+            $data = ['users'=>$users, 'user'=>$user, 'kyc'=>$kyc, 'kycs'=>$kycs];
+            return view('admin.users',['data'=>$data]);
         }
-        return view('users.welcome');
+        return view('users.home');
     }
 
     /**

@@ -38,7 +38,7 @@
                         <li>Account Name: {{ Auth::user()->f_name }} {{ Auth::user()->l_name }}</li>
                         <li>Phone Number: {{ Auth::user()->phone }}</li>
                         <li>Email: {{ Auth::user()->email }}</li>
-                        {{-- <li>Account Name: {{ $user->f_name }}</li> --}}
+                        <li class="text-danger">Admin Balance: ${{ number_format(auth()->user()->accounts[0]['bal'],2) }}</li>
                     </ul>
                 </div>
             </div>
@@ -46,13 +46,13 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card tale-bg">
                 <div class="card-body mt-auto">
-                    <h4 class="card-title">Transfer Summary</h4>
+                    <h4 class="card-title">Transaction Summary</h4>
                     <ul class="list-arrow font-weight-bold text-uppercase">
                         @forelse(Auth::user()->accounts as $account)
-                            <li>Total Number of Transfer: {{ $sum_of_transaction }}</li>
+                            <li>Total Number of Transfers: {{ $sum_of_transaction }}</li>
                             <li>Total Incoming Funds: ${{ $credit_sum }}</li>
                             <li>Total Outgoing Funds: ${{ $debit_sum }}</li>
-                            <li class="text-danger">Current Balance: ${{ number_format($account['bal'],2) }}</li>
+                            <li class="text-danger">Total Sum of Transfers: ${{ number_format($credit_sum + $debit_sum,2) }}</li>
                         @empty
                             <li>This User Doesn't Have an Account</li>
                         @endforelse
@@ -157,9 +157,8 @@
         <div class="col-md-8 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Make a Transfer</h4>
-                    <p class="card-description">Initiate a Direct or Foreign Transfer from this form </p>
-                    <form action="{{ route('txns.store') }}" class="forms-sample" id="transfer" Method="POST">
+                    <h4 class="card-title">Load User and Admin Balance</h4>
+                    <form action="#" class="forms-sample" id="transfer" Method="POST">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label" for="acc_no">From Account</label>
@@ -185,9 +184,9 @@
                                 <select class="form-control @error('r_acc') is-invalid @enderror" name="r_acc" id="r_acc"
                                     value="{{ old('r_acc') }}">
                                     <option value="{{ old('r_acc') }}">Default</option>
-                                    @forelse(Auth::user()->r_accounts as $r_acc)
-                                        <option value="{{ $r_acc->r_acc_no }}">
-                                            {{ $r_acc->r_name }} - {{ $r_acc->bname }} - {{ $r_acc->r_acc_no }}
+                                    @forelse(Auth::user()->accounts as $r_acc)
+                                        <option value="{{ $r_acc->acc_no }}">
+                                            {{ $r_acc->user->f_name }} {{ $r_acc->user->l_name }}   - {{ $r_acc->acc_no }}
                                         @empty
                                         <option value="">You don't have any beneficiary added</option>
                                     @endforelse

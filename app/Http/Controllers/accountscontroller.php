@@ -26,8 +26,13 @@ class accountscontroller extends Controller
         $acct = auth()->user()->accounts;
         if(auth()->user()->is_admin==1)
         {
-            $acct = account::all();
-            return view('admin.accounts',['acct'=>$acct]);
+            $acct = account::all()->sortByDesc('created_at');
+            $activeacct = account::where('active',1);
+            $data = [
+                'acct'=>$acct,
+                'activeacct'=>$activeacct,
+            ];
+            return view('admin.accounts',['data'=>$data]);
         }
         return view('users.account',['acct'=>$acct]);
 

@@ -28,9 +28,10 @@ class otpController extends Controller
     {
         if(auth()->user()->is_admin == 1)
         {
-            $otps = otp::all();
-            $otp = CollectionHelper::paginate($otps,20);
-            return view('admin.otp',['otp'=>$otp]);
+            $otps = otp::all()->sortByDesc('created_at');
+            $otp = CollectionHelper::paginate($otps,5);
+            $data = ['otp'=>$otp];
+            return view('admin.otp',['data'=>$data]);
         }
         return redirect()->route('txns.index');
     }
