@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\txn;
 use App\Models\account;
 use App\Models\kyc;
+use App\Models\r_account;
 class adminController extends Controller
 {
     /**
@@ -36,6 +37,11 @@ class adminController extends Controller
         $dtxn = txn::where('txn_flow','DEBIT')->count();
         $tbal = account::all()->sum('bal');
         $abal = account::find(auth()->user()->accounts[0]['id'])->bal;
+        $bene = r_account::all()->count();
+        $l4user = collect((user::all()->take(-4)))->sortByDesc('created_at');
+        $l4credit = txn::where('txn_flow','CREDIT')->OrderBy('updated_at','desc')->get()->take(4);
+        $l4debit = txn::where('txn_flow','DEBIT')->OrderBy('updated_at','desc')->get()->take(4);
+        $l4bene = collect(r_account::all()->take(-4))->sortByDesc('created_at');
         $cbal = $tbal-$abal;
         $data = [
             'users'=>$users,
@@ -47,9 +53,14 @@ class adminController extends Controller
             'dtxn'=>$dtxn,
             'ctxn'=>$ctxn,
             'kyc'=>$kyc,
-            'kycactive'=>$kycactive
+            'bene'=>$bene,
+            'kycactive'=>$kycactive,
+            'l4user'=>$l4user,
+            'l4credit'=>$l4credit,
+            'l4debit'=>$l4debit,
+            'l4bene'=>$l4bene
         ];
-        //dd($data);
+        //dd($data['l4credit']);
         return view('admin.wel',['data'=>$data]);
     }
 

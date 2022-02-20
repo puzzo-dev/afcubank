@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         //$user = txn::where('account_id', Auth::user()->accounts[0]['id'])->paginate(4);
         $txn = Auth::user()->txns->take(-4);
-        $txns = collect($txn)->sortByDesc('id');
+        $txns = collect($txn)->sortByDesc('updated_at');
         if(auth()->user()->is_admin == 1){
 
             return redirect()->route('admin.index');

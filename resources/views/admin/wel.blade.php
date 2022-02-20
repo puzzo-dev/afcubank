@@ -37,8 +37,8 @@
                 <p class="fs-30 mb-4">{{ $data['kyc'] }}</p>
                 <p class="mb-4">Users with KYC Activated</p>
                 <p class="fs-30 mb-4">{{ $data['kycactive'] }}</p>
-                <p class="mb-4">Number of Active Accounts</p>
-                <p class="fs-30 mb-4">{{ $data['activeusers'] }}</p>
+                <p class="mb-4">Number of Benficiaries Added</p>
+                <p class="fs-30 mb-4">{{ $data['bene'] }}</p>
             </div>
         </div>
     </div>
@@ -89,6 +89,127 @@
                 <p class="fs-30 mb-4">{{ number_format($data['abal'],2) }}</p>
                 <p class="mb-2">Total Bank Balance</p>
                 <p class="fs-30 mb-4">{{ number_format($data['tbal'],2) }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-7 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Last 4 Registered User</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Created On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($data['l4user'] as $user)
+                            <tr>
+                                <td>{{ $user->f_name }} {{ $user->l_name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
+                                @empty
+                                <td>No User Registered Yet</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-5 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Last 4 Added Beneficiaries</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Account Number</th>
+                                <th>Bank Name</th>
+                                <th>Created On</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($data['l4bene'] as $bene)
+                            <tr>
+                                <td>{{ $bene->r_acc_no }}</td>
+                                <td>{{ $bene->bname }}</td>
+                                <td>{{ date('d-m-Y', strtotime($bene->created_at)) }}</td>
+                            @empty
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Last 4 Credit Transaction</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Txn No</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($data['l4credit'] as $credit)
+                            <tr>
+                                <td></td>
+                                <td>{{ $credit->txn_no }}</td>
+                                <td>{{ $credit->amt }}</td>
+                                <td>{{ date('d-m-Y', strtotime($credit->created_at)) }}</td>
+                            @empty
+                            <td>Empty</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Last 4 Debit Transaction</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Transaction Number</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($data['l4debit'] as $debit)
+                            <tr>
+                                <td>{{ $debit->txn_no }}</td>
+                                <td>{{ $debit->txn_amount }}</td>
+                                <td>{{ date('d-m-Y', strtotime($debit->created_at)) }}</td>
+                            @empty
+                            <td>Empty</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
