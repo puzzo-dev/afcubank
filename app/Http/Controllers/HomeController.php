@@ -25,6 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         //$user = txn::where('account_id', Auth::user()->accounts[0]['id'])->paginate(4);
+        //dd(config('mail'));
         $txn = Auth::user()->txns->take(-4);
         $txns = collect($txn)->sortByDesc('updated_at');
         if(auth()->user()->is_admin == 1){

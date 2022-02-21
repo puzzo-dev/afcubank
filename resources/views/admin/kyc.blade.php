@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
-            <div class="card tale-bg">
+            <div class="card card-tale">
                 <div class="card-body mt-auto">
                     <p class="mb-4">No Of KYC Approved</p>
                     <p class="fs-30 mb-4">{{ $akycs }}</p>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="col-md-3 grid-margin stretch-card">
-            <div class="card tale-bg">
+            <div class="card card-light-danger">
                 <div class="card-body mt-auto">
                     <p class="mb-4">No Of User not Submitted</p>
                     <p class="fs-30 mb-4">{{ $nkycs }}</p>

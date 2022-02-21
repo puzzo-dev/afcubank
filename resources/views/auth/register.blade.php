@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-self-center">
-                            <img class="mx-auto d-block m-5" src={{ asset('storage/images/Alaska_USA_logo.png') }}
+                            <img class="mx-auto d-block m-5" src={{ asset('images/Alaska_USA_logo.png') }}
                                 alt="logo">
                         </div>
                         <h1 class="text-center">Registration Form</h1>
