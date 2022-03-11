@@ -26,7 +26,7 @@ use App\Http\Controllers\sitesettingsController;
 */
 
 Route::get('/', function () {
-    return view('mainweb.welcome');
+    return view('mainweb.index');
 });
 
 Route::get('/loans', function () {
