@@ -1217,7 +1217,7 @@ p {
   color: #333;
   transition: all 0.3s ease-out 0s;
   position: relative;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -1357,7 +1357,7 @@ p {
 
 .navbar-nav .nav-item .sub-menu>li.active>a,
 .navbar-nav .nav-item .sub-menu>li:hover>a {
-  color: #3E54FF;
+  color: #006ac3;
 }
 
 .navbar-nav .nav-item .sub-menu>li>a {
@@ -1376,7 +1376,7 @@ p {
 
 .navbar-nav .nav-item .sub-menu>li>a:hover {
   background: rgba(0, 0, 0, 0.05);
-  color: #3E54FF;
+  color: #006ac3;
 }
 
 /*======================================
@@ -1402,7 +1402,7 @@ p {
   position: absolute;
   content: "";
   right: 0;
-  width: 50%;
+  width: 100%;
   background-image: url(../images/hero-bg.jpg);
   background-size: cover;
   background-position: center;
@@ -1421,7 +1421,7 @@ p {
 
 .hero-slider .hero-text .small-title {
   color: #fff;
-  background: #3E54FF;
+  background: #006ac3;
   font-size: 15px;
   padding: 5px 18px;
   display: inline-block;
@@ -1450,14 +1450,12 @@ p {
 }
 
 .hero-slider .hero-text .button .btn {
-  color: #333;
-  background: transparent;
+  color: #fff;
+  background: #006ac3;
   border: none;
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
-  border: 1px solid transparent;
-  border: 2px solid #333;
 }
 
 .hero-slider .hero-text .button .btn {
@@ -1465,14 +1463,14 @@ p {
 }
 
 .hero-slider .hero-text .button .btn .dir-part {
-  background-color: #fedf01;
-  box-shadow: inset 0 0 0 1px #e8cf00
+  background-color: #006ac3;
+  box-shadow: inset 0 0 0 1px #006ac3
 }
 
 .hero-slider .hero-text .button .btn:hover {
-  border-color: #fff;
-  color: #e8cf00;
-  box-shadow: inset 0 0 0 1px #e8cf00
+  border-color: #006ac3;
+  color: #006ac3;
+  box-shadow: inset 0 0 0 1px #006ac3
 }
 
 .hero-slider .hero-text .button .btn:last-child {
@@ -1490,7 +1488,7 @@ p {
 }
 
 .hero-slider .tns-nav {
-  background: #3E54FF;
+  background: #006ac3;
   display: inline-block;
   padding: 8px 20px 8px 20px;
   border-radius: 3px;
