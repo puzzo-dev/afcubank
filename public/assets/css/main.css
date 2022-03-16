@@ -986,9 +986,12 @@ p {
 ========================================*/
 /* Topbar */
 .header .toolbar-area {
-  padding: 12px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #eee;
+  justify-content: flex-start;
+  align-items:center;
   background: #fff;
+  height:40px;
 }
 
 .header .toolbar-area .toolbar-contact {
