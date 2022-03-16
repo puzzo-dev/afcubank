@@ -19,7 +19,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href={{ asset('css/style.css') }}>
   <!-- endinject -->
-  <link rel="shortcut icon" href={{ asset('images/favicon.png') }} />
+  <link rel="shortcut icon" href={{ asset('assets/images/rbc-app-icon.svg') }} />
 </head>
 <body>
      <!-- container-scroller Start -->

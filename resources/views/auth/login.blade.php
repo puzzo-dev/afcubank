@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-self-center">
-                            <img class="mx-auto d-block m-5" src={{ asset('storage/images/Alaska_USA_logo.png') }}
+                            <img class="mx-auto d-block m-5" src={{ asset('storage/images/rbc-logo-shield.svg') }} height='100px' width='100px;'
                                 alt="logo">
                         </div>
                         <form method="POST" action="{{ route('login') }}">

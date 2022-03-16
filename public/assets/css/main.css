@@ -991,11 +991,12 @@ p {
   justify-content: flex-start;
   align-items:center;
   background: #fff;
-  height:40px;
 }
 
 .header .toolbar-area .toolbar-contact {
-  margin-top: 8px;
+  justify-content: center;
+  vertical-align: middle;
+  height: 20px;
 }
 
 .header .toolbar-area .toolbar-contact p {
@@ -1102,7 +1103,7 @@ p {
 }
 
 .navbar-area.sticky {
-  position: fixed;
+  /* position: fixed; */
   z-index: 99;
   background: #3E54FF;
   box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.05);
@@ -1335,7 +1336,7 @@ p {
 @media only screen and (min-width: 768px) and (max-width: 991px),
 (max-width: 767px) {
   .navbar-nav .nav-item .sub-menu {
-    position: static;
+    /* position: static; */
     width: 100%;
     opacity: 1;
     visibility: visible;

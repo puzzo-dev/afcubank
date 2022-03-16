@@ -6,7 +6,7 @@
     <title>RBC Royal Bank</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/rbc-app-icon.svg" />
     <!-- Place favicon.ico in the root directory -->
 
     <!-- Web Font -->
@@ -51,9 +51,9 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-9 col-12">
                         <div class="toolbar-contact">
-                            <p><i class="lni lni-envelope"></i><a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a></p>
-                            <p><i class="lni lni-phone"></i><a href="tel:+123456789">(+123) 456789</a></p>
-                            <p><i class="lni lni-map-marker"></i> Location H-11,R-20/2,USA</p>
+                            <p><a href="#">Personal</a></p>
+                            <p><a href="#">Business</a></p>
+                            <p><a href="#"> About RBC </a></p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-3 col-12">
@@ -108,7 +108,7 @@
                             </ul>
                         </div> <!-- navbar collapse -->
                         <div class="button">
-                            <a href="javascript:void(0)" class="btn white-bg mouse-dir">Sign In<span class="dir-part"></span></a>
+                            <a href="/login" class="btn white-bg mouse-dir">Sign In<span class="dir-part"></span></a>
                         </div>
                     </nav> <!-- navbar -->
                 </div>
@@ -124,7 +124,7 @@
         <!-- Single Slider -->
         <div class="single-slider">
             <div class="container">
-                <div class="row ">
+                <div class="row">
                     <div class="col-lg-6 col-12">
                         <div class="home-slider">
                             <div class="hero-text">
@@ -135,7 +135,7 @@
                                             class="dir-part"></span></a>
                                 </div>
                             </div>
-                            <div class="hero-text">
+                            {{-- <div class="hero-text">
                                 <span class="small-title">Business Solution</span>
                                 <h1><span>We Provide Quality</span><br> Consulting Services</h1>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting <br> industry. Lorem
@@ -153,7 +153,7 @@
                                 <div class="button">
                                     <a href="/about-us.html" class="btn mouse-dir">Discover More <span
                                             class="dir-part"></span></a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -165,14 +165,14 @@
     <!--/ End Hero Area -->
 
     <!-- Start Features Area -->
-    <section class="Features section">
+    {{-- <section class="Features section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="feature-right wow fadeInUp" data-wow-delay=".3s">
                         <div class="watch-inner">
                             <div class="video-head wow zoomIn" data-wow-delay="0.4s">
-                                <a href="https://www.youtube.com/watch?v=BqI0Q7e4kbk" class="glightbox video"><i
+                                <a href="#" class="glightbox video"><i
                                         class="lni lni-play"></i></a>
                             </div>
                         </div>
@@ -218,13 +218,13 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- End Features Area -->
 
     <!-- Start Service Area -->
     <section class="services section">
         <div class="container">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-12">
                     <div class="section-title">
                         <span class="wow fadeInDown" data-wow-delay=".2s">What We Offer You</span>
@@ -232,7 +232,7 @@
                         <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="single-service wow fadeInUp" data-wow-delay=".2s">
@@ -241,6 +241,7 @@
                         </div>
                         <h3><a href="service-single.html">Web Solution</a></h3>
                         <p>Need A Project Completed By An Expert? Let’s Go! Access A Human Resources Consultant To Answer Questions</p>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
@@ -261,33 +262,7 @@
                         <p>Need A Project Completed By An Expert? Let’s Go! Access A Human Resources Consultant To Answer Questions</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="single-service wow fadeInUp" data-wow-delay=".5s">
-                        <div class="serial">
-                            <span><i class="lni lni-keyword-research"></i></span>
-                        </div>
-                        <h3><a href="service-single.html">Strategy & Research</a></h3>
-                        <p>Need A Project Completed By An Expert? Let’s Go! Access A Human Resources Consultant To Answer Questions</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="single-service wow fadeInUp" data-wow-delay=".6s">
-                        <div class="serial">
-                            <span><i class="lni lni-seo"></i></span>
-                        </div>
-                        <h3><a href="service-single.html">SEO & Marketing</a></h3>
-                        <p>Need A Project Completed By An Expert? Let’s Go! Access A Human Resources Consultant To Answer Questions</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="single-service wow fadeInUp" data-wow-delay=".7s">
-                        <div class="serial">
-                            <span><i class="lni lni-bar-chart"></i></span>
-                        </div>
-                        <h3><a href="service-single.html">Growth Tracking</a></h3>
-                        <p>Need A Project Completed By An Expert? Let’s Go! Access A Human Resources Consultant To Answer Questions</p>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
@@ -627,7 +602,7 @@
     <script type="text/javascript">
         //========= glightbox
         GLightbox({
-            'href': 'https://www.youtube.com/watch?v=BqI0Q7e4kbk&t=1s',
+            'href': '#',
             'type': 'video',
             'source': 'youtube', //vimeo, youtube or local
             'width': 900,
