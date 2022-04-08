@@ -57,7 +57,7 @@ class accountscontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //return null;
     }
 
     /**

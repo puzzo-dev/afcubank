@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+main {
+  background-color: #fff;
+  color: #333;
+}
+main nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main nav ul {
+  display: flex;
+  list-style-type: none;
+}
+main nav li {
+  padding: 15;
+}
+main nav a {
+  color: #333;
+}

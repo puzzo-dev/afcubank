@@ -1,0 +1,27 @@
+$body-bg:#ffffff;
+$primary-color: #fff;
+$secondary-color: #000;
+$font-stack: Helvetica, sans-serif, Arial;
+$font-weights:(
+    "regular": 400,
+    "Medium": 600,
+    "small": 200,
+    "Bold":800
+);
+
+
+// set test Color based on BG
+
+@function set-text-color($color) {
+    @if(lightness($color)>70){
+        @return #333;
+    }@else{
+        @return #fff;
+    }
+}
+
+// Set background & text color
+@mixin set-background($color){
+    background-color: $color;
+    color: set-text-color($color)
+}

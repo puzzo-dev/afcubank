@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('content')
-@if (session('success'))
+    @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-<div class="row">
+    <div class="row">
         <div class="col-md-12 grid-margin">
             <div class="row">
                 <div class="col-12 col-xl-8 mb-3 mb-xl-0">
@@ -83,15 +83,17 @@
                             </thead>
                             <tbody>
                                 @forelse($data['acct'] as $accts)
-                                <tr>
-                                    <td><a href="{{ route('account.show',$accts->id) }}">{{ $accts->id }}</a></td>
-                                    <td>{{ $accts->acc_type }}</td>
-                                    <td>{{ $accts->acc_no }}</td>
-                                    <td>{{ $accts->bal }}</td>
-                                    <td><a class="text-primary" href="#">edit</a><hr><a class="text-danger" href="">delete</a></td>
+                                    <tr>
+                                        <td><a href="{{ route('account.show', $accts->id) }}">{{ $accts->id }}</a></td>
+                                        <td>{{ $accts->acc_type }}</td>
+                                        <td>{{ $accts->acc_no }}</td>
+                                        <td>{{ $accts->bal }}</td>
+                                        <td><a class="text-primary" href="#">edit</a>
+                                            <hr><a class="text-danger" href="">delete</a>
+                                        </td>
                                     @empty
-                                    <td>Empty</td>
-                                </tr>
+                                        <td>Empty</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
