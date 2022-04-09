@@ -1,0 +1,35 @@
+%nav {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ul {
+        display: flex;
+        list-style-type: none;
+    }
+
+    a {
+        color: set-text-color($body-bg);
+    }
+
+    a:hover {
+        color: $primary-color;
+    }
+}
+
+.navbar {
+    @extend %nav;
+    font-size: map-get($font-sizes,"small");
+    li {
+        margin-right:15px;
+    }
+}
+
+.btm-nav {
+    @extend %nav;
+    font-weight: map-get($font-weights, "regular");
+    li {
+        margin-right:20px;
+    }
+}

@@ -5,8 +5,8 @@
     @endif
     <div class="row">
         <div class="col-md-12 grid-margin">
-            <div class="row">
-                <div class="col-12 col-xl-8 mb-3 mb-xl-0">
+            <div class="row mb-3">
+                <div class="col-12 col-xl-8 mb-xl-0">
                     <h4 class="font-weight-bold">Welcome {{ Auth::user()->f_name }} {{ Auth::user()->l_name }}</h4>
                     <h6 class="font-weight-normal mb-0">Last Login Date: {{ now() }}</h6>
                 </div>

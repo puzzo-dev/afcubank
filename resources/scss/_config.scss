@@ -1,12 +1,22 @@
 $body-bg:#ffffff;
-$primary-color: #fff;
-$secondary-color: #000;
-$font-stack: Helvetica, sans-serif, Arial;
+$primary-color: #063169;
+$secondary-color: #e4202c;
+$accent-color: #0c1224;
+$k-button: #DB912C;
+$font-stack: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-weights:(
     "regular": 400,
-    "Medium": 600,
+    "Medium": 650,
     "small": 200,
-    "Bold":800
+    "Bold": 700
+);
+
+$font-sizes:(
+    "small":.6875rem,
+    "button":.9375rem,
+    "Medium": 1.0625rem,
+    "Large": 50px,
 );
 
 

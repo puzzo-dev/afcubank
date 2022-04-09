@@ -21,7 +21,7 @@ class txnscontroller extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth']);
     }
     /**
      * Display a listing of the resource.
@@ -79,7 +79,7 @@ class txnscontroller extends Controller
         $desc = $request->input('desc');
 
         if ($desc == null) {
-            $desc = "You have sent $" . number_format($request->input('amt'),2) . " to " . $request->input('r_acc');
+            $desc = "You have sent €" . number_format($request->input('amt'),2) . " to " . $request->input('r_acc');
         }
 
         $accx = str_split($request->input('r_acc'), 4);

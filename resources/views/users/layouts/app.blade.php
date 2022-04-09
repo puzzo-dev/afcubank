@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Anchorage FCU</title>
+  <title>PKO Bank</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href={{ asset('vendors/feather/feather.css') }}>
   <link rel="stylesheet" href={{ asset('vendors/ti-icons/css/themify-icons.css') }}>
@@ -19,7 +19,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href={{ asset('css/style.css') }}>
   <!-- endinject -->
-  <link rel="shortcut icon" href={{ asset('images/favicon.png') }} />
+  <link rel="shortcut icon" href={{ asset('/images/pko-white-bg.svg') }} />
 </head>
 <body>
      <!-- container-scroller Start -->

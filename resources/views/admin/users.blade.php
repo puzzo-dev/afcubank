@@ -84,7 +84,7 @@
                             <tbody>
                                 @forelse($data['users'] as $users)
                                 <tr>
-                                    <td><a href="{{ route('accusers.show',$users->id) }}">{{ $users->id }}</a></td>
+                                    <td><a href="#">{{ $users->id }}</a></td>
                                     <td>{{ $users->f_name }}</td>
                                     <td>{{ $users->email }}</td>
                                     <td>{{ $users->phone }}</td>

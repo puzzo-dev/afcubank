@@ -6,8 +6,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-self-center">
-                            <img class="mx-auto d-block m-5" src={{ asset('storage/images/rbc-logo-shield.svg') }}
-                                alt="logo">
+                            <img class="mx-auto d-block m-5" src="{{ asset('images/pko-white-bg.svg') }}"
+                                alt="logo" width="100px;"/>
                         </div>
                         <h1 class="text-center">Registration Form</h1>
                         <form method="POST" class="form" action="{{ route('register') }}">

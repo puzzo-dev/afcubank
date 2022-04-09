@@ -45,7 +45,7 @@
                </a>
           </li>
           <li class="nav-item">
-               <a href="{{ route('accusers.edit',Auth::user())}}" class="nav-link">
+               <a href="/usettings" class="nav-link">
                     <i class="ti-settings menu-icon"></i>
                     <span class ="menu-title">Profile Settings</span>
                </a>

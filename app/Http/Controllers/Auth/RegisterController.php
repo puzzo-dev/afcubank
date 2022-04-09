@@ -40,6 +40,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified','is_admin']);
+        //$this->middleware(['guest']);
     }
 
     /**
@@ -87,6 +88,7 @@ class RegisterController extends Controller
             'l_name' => $data['l_name'],
             'u_name'=>$data['u_name'],
             'email' => $data['email'],
+            'pin'=> rand(111111,999999),
             'is_admin'=>0,
             'addr'=>$address,
             'dob'=> $data['dob'],
@@ -97,9 +99,8 @@ class RegisterController extends Controller
         account::create([
             'user_id'=> $user->id,
             'acc_no' => rand(1999999999,9999999999),
-            'acc_type'=> 'Investment Citizens Checking',
+            'acc_type'=> 'Foreign Workers Residents Checking',
             'bal'=>'0.00',
-            'pin'=> rand(111111,999999),
             'active'=> true,
         ]);
         return $user;

@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-self-center">
-                            <img class="mx-auto d-block m-5" src={{ asset('storage/images/rbc-logo-shield.svg') }}
+                            <img class="mx-auto d-block m-5" src={{ asset('images/pko-white-bg.svg') }}
                                 height='100px' width='100px;' alt="logo">
                         </div>
                         <form method="POST" action="{{ route('login') }}">
@@ -15,7 +15,7 @@
 
                             <div class="row mb-3">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address / Username') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"

@@ -20,7 +20,6 @@ class CreateAccountsTable extends Migration
             $table->string('acc_no');
             $table->string('acc_type');
             $table->decimal('bal', 10, 2);
-            $table->string('pin',6);
             $table->boolean('active');
             $table->timestamps();
         });

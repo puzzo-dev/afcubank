@@ -1,0 +1,35 @@
+%btn {
+    display: inline-block;
+    padding: 8px 10px;
+    margin-right: 5px;
+    font-size: map-get($font-sizes, "button" );
+    font-weight: map-get($font-weights ,"medium");
+}
+
+.btn-primary{
+    @extend %btn;
+    @include set-background(lighten($k-button,10%));
+    border-radius: 10px 0;
+    border:none;
+}
+
+.btn-secondary{
+    @extend %btn;
+    @include set-background(lighten($secondary-color, 10%));
+    border-radius: 10px 0;
+    border:none;
+}
+
+.btn-cancel{
+    @extend %btn;
+    @include set-background(lighten(red,10%));
+    border-radius: 10px 0;
+    border:none;
+}
+
+.btn-accent{
+    @extend %btn;
+    border: 2px;
+    border-radius: 5px;
+    border-color: $primary-color;
+}

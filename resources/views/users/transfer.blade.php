@@ -251,6 +251,14 @@
         <div class="col-md-4 grid-margin stretch-card">
             <div class="card bg-primary">
                 <div class="card-body">
+                    <br>
+                    <ul class="list-star font-weight-bold text-uppercase justify-center text-white">
+                        <li>Make All Transfers on This Page</li>
+                        <br>
+                        <li>You need to add Beneficiaries Before you make Transfers</li>
+                        <br>
+                        <li>Your Account May not be able to make transfer without KYC Verification</li>
+                    </ul>
 
                 </div>
             </div>

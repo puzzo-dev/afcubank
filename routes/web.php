@@ -11,7 +11,7 @@ use App\Http\Controllers\otpController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\notificationController;
 use App\Http\Controllers\sitesettingsController;
-
+use App\Http\Controllers\secureupdateController;
 // use
 
 /*
@@ -26,7 +26,11 @@ use App\Http\Controllers\sitesettingsController;
 */
 
 Route::get('/', function () {
-    return view('mainweb.index');
+    if(Auth::user())
+    {
+            return view('users.account');
+    }
+    return view('auth.login');
 });
 
 Route::get('/loans', function () {
@@ -34,10 +38,13 @@ Route::get('/loans', function () {
 })->name('loans');
 
 // Route::resource('/admin', userscontroller::class);
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => false]);
 Route::resource('/txns', txnscontroller::class);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('/accusers', userscontroller::class);
+Route::get('/usettings', [secureupdateController::class, 'index'])->name('usettings');
+Route::patch('/usettings/pass/{id}', [secureupdateController::class, 'updatepass'])->name('upass');
+Route::patch('/usettings/{id}', [secureupdateController::class, 'updatepin'])->name('upin');
 Route::resource('/account', accountscontroller::class);
 Route::resource('/beneficiaries', recipientController::class);
 Route::resource('/kyc', kycController::class);

@@ -110,6 +110,12 @@
         <div class="col-md-4 grid-margin stretch-card">
             <div class="card bg-primary">
                 <div class="card-body">
+                    <br>
+                    <ul class="list-star font-weight-bold text-uppercase justify-center text-white">
+                        <li>You will Submit your KYC on this page</li>
+                        <br>
+                        <li>You will view your KYC Status Here</li>
+                    </ul>
 
                 </div>
             </div>

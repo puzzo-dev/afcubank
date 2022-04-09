@@ -156,6 +156,14 @@
         <div class="col-md-4 grid-margin stretch-card">
             <div class="card bg-primary">
                 <div class="card-body">
+                    <br>
+                    <br>
+                    <ul class="list-star font-weight-bold text-uppercase justify-center text-white">
+                        <li>You will add and Remove beneficiaries for Transfer Here </li>
+                        <br>
+                        <li>You will view and Manage all Beneficiaries on this Page</li>
+                        <br>
+                    </ul>
 
                 </div>
             </div>

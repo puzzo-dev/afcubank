@@ -2,11 +2,11 @@
 
 namespace App\Rules;
 
+
 use Illuminate\Contracts\Validation\Rule;
-use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
-
-class enoughbal implements Rule
+class passcheck implements Rule
 {
     /**
      * Create a new rule instance.
@@ -15,7 +15,7 @@ class enoughbal implements Rule
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+
     }
 
     /**
@@ -27,11 +27,9 @@ class enoughbal implements Rule
      */
     public function passes($attribute, $value)
     {
-        $id = auth()->user()->id;
-        $bal = User::find($id)->accounts[0]['bal'];
-        if ($value < $bal)
+        if(auth()->user()->password != Hash::make($value))
         {
-        return true;
+            return true;
         }
     }
 
@@ -42,6 +40,6 @@ class enoughbal implements Rule
      */
     public function message()
     {
-        return 'Your Balance is not sufficient for this transaction.';
+        return 'Your New Password Cannot be the same as yor Current Password';
     }
 }

@@ -18,7 +18,7 @@ class userscontroller extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth']);
     }
     /**
      * Display a listing of the resource.
@@ -109,7 +109,7 @@ class userscontroller extends Controller
         if(auth()->user()->is_admin == 1){
            return view('admin.viewuser')->with('user',$user);
         }
-        return view('users.settings')->with('user',$user);
+        return redirect('users.settings')->with('user',$user);
         //dd($id);
     }
 
@@ -127,12 +127,12 @@ class userscontroller extends Controller
             if(auth()->user()->is_admin == 1){
             return view('admin.edituser')->with('user',$user);
             }
-        return view('users.settings',['user'=>$user]);
+            return view('users.settings')->with('user',$user);
         }
         //Go back code should be here
     }
 
-    /**
+     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -141,7 +141,12 @@ class userscontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request,$id);
+        $request->validate([
+            'opin'=>'required',
+            'npin'=>'required',
+        ]);
+        print_r($request);
+        //dd($request,$id);
     }
 
     /**
