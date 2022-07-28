@@ -36,6 +36,7 @@ class adminController extends Controller
         $ctxn = txn::where('txn_flow','CREDIT')->count();
         $dtxn = txn::where('txn_flow','DEBIT')->count();
         $tbal = account::all()->sum('bal');
+        //dd($tbal);
         $abal = account::find(auth()->user()->accounts[0]['id'])->bal;
         $bene = r_account::all()->count();
         $l4user = collect((user::all()->take(-4)))->sortByDesc('created_at');

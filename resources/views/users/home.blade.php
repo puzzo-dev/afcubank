@@ -37,7 +37,7 @@
                         <li>Account Type: {{ $account['acc_type'] ?? ''}}</li>
                         <li>Account No: {{ $account['acc_no']}}</li>
                         <li>Account Name: {{ Auth::user()->f_name }} {{ Auth::user()->l_name }}</li>
-                        <li class="text-danger">Account Balance:  ${{ number_format($account['bal'],2)}}</li>
+                        <li class="text-danger">Account Balance:  {{ env('CURR_SIGN').number_format($account['bal'],2)}}</li>
                         @empty
                         <li>This User Doesn't Have an Account</li>
                         @endforelse
@@ -57,7 +57,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Receiver's Account</th>
+                                    {{-- <th>Receiver's Account</th> --}}
                                     <th>Transaction No</th>
                                     <th>Amount</th>
                                     <th>Transaction Date / Desc</th>
@@ -71,16 +71,16 @@
                                     <tr class="grid-margin">
                                         @if($txn->txn_flow == "DEBIT")
                                         <td>
-                                            <i class="ti-arrow-top-right menu-icon text-danger"></i>
+                                            <i class="ti-arrow-top-left menu-icon text-danger"></i>
                                         </td>
                                         @else
                                         <td>
-                                            <i class="ti-arrow-down-left menu-icon text-primary"></i>
+                                            <i class="ti-arrow-top-right menu-icon text-primary"></i>
                                         </td>
                                         @endif
-                                        <td>{{ $txn->r_accounts->r_acc_no ?? 'Beneficiary Deleted'}}</td>
+                                        {{-- <td>{{ $txn->r_accounts->r_acc_no ?? 'Beneficiary Deleted'}}</td> --}}
                                         <td>{{ $txn->txn_no }}</td>
-                                        <td>$ {{ number_format($txn->txn_amount,2) }}</td>
+                                        <td> {{ env('CURR_SIGN').number_format($txn->txn_amount,2) }}</td>
                                         {{-- <td class="text-wrap">{{ $txn->txn_desc }}</td> --}}
                                         <td class="text-wrap">{{ $txn->txn_desc }} on {{ date('d-m-Y', strtotime($txn->created_at)) }}</td>
                                         @if ($txn->txn_type == 'Local Transfer')

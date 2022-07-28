@@ -27,6 +27,7 @@ class userscontroller extends Controller
      */
     public function index()
     {
+        $curr=env('CURR_SIGN');
         if(auth()->user()->is_admin == 1)
         {
             $us = user::all()->sortByDesc('created_at');
@@ -34,7 +35,7 @@ class userscontroller extends Controller
             $user =  account::where('active',1)->count();
             $kyc = kyc::where('status',1)->count();
             $kycs = kyc::all()->count();
-            $data = ['users'=>$users, 'user'=>$user, 'kyc'=>$kyc, 'kycs'=>$kycs];
+            $data = ['curr'=>$curr,'users'=>$users, 'user'=>$user, 'kyc'=>$kyc, 'kycs'=>$kycs];
             return view('admin.users',['data'=>$data]);
         }
         return view('users.home');

@@ -19,7 +19,7 @@ class CreateAccountsTable extends Migration
                   ->constrained();
             $table->string('acc_no');
             $table->string('acc_type');
-            $table->decimal('bal', 10, 2);
+            $table->decimal('bal', 20, 2);
             $table->boolean('active');
             $table->timestamps();
         });

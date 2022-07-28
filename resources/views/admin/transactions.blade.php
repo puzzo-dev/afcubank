@@ -2,6 +2,8 @@
 @section('content')
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
+    @elseif(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
     <div class="row">
         <div class="col-md-12 grid-margin">
@@ -38,7 +40,8 @@
                         <li>Account Name: {{ Auth::user()->f_name }} {{ Auth::user()->l_name }}</li>
                         <li>Phone Number: {{ Auth::user()->phone }}</li>
                         <li>Email: {{ Auth::user()->email }}</li>
-                        <li class="text-danger">Admin Balance: ${{ number_format(auth()->user()->accounts[0]['bal'],2) }}</li>
+                        <li class="text-danger">Admin Balance: ${{ number_format(auth()->user()->accounts[0]['bal'], 2) }}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -52,7 +55,8 @@
                             <li>Total Number of Transfers: {{ $sum_of_transaction }}</li>
                             <li>Total Incoming Funds: ${{ $credit_sum }}</li>
                             <li>Total Outgoing Funds: ${{ $debit_sum }}</li>
-                            <li class="text-danger">Total Sum of Transfers: ${{ number_format($credit_sum + $debit_sum,2) }}</li>
+                            <li class="text-danger">Total Sum of Transfers:
+                                ${{ number_format($credit_sum + $debit_sum, 2) }}</li>
                         @empty
                             <li>This User Doesn't Have an Account</li>
                         @endforelse
@@ -83,7 +87,6 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Receiver's Account</th>
                                     <th>Transaction No</th>
                                     <th>Amount</th>
                                     <th>Transaction Date / Desc</th>
@@ -96,17 +99,17 @@
                                     <tr class="grid-margin">
                                         @if ($txn->txn_flow == 'DEBIT')
                                             <td>
-                                                <i class="ti-arrow-top-right menu-icon text-danger"></i>
+                                                <i class="ti-arrow-top-left menu-icon text-danger"></i>
                                             </td>
                                         @else
                                             <td>
-                                                <i class="ti-arrow-down-left menu-icon text-primary"></i>
+                                                <i class="ti-arrow-top-right menu-icon text-primary"></i>
                                             </td>
                                         @endif
 
-                                        <td>{{ $txn->r_accounts->r_acc_no ?? '[Beneficiary Deleted]'}}</td>
+                                        {{-- <td>{{ $txn->r_accounts->r_acc_no ?? '[Beneficiary Deleted]' }}</td> --}}
                                         <td>{{ $txn->txn_no }}</td>
-                                        <td>$ {{ number_format($txn->txn_amount,2) }}</td>
+                                        <td>{{ $curr.number_format($txn->txn_amount, 2) }}</td>
                                         {{-- <td class="text-wrap">{{ $txn->txn_desc }}</td> --}}
                                         <td class="text-wrap">{{ $txn->txn_desc }} on
                                             {{ date('d-m-Y', strtotime($txn->created_at)) }}</td>
@@ -127,10 +130,13 @@
                                             @elseif($txn->txn_status == 'Pending')
                                                 <td><label class="badge badge-warning">{{ $txn->txn_status }}</label>
                                                 </td>
-                                                <td><a class="text-primary" href="{{ route('txns.edit', $txn) }}">Finish</a><hr>
-                                                    <a class="text-danger" href="{{ route('txns.update',  $txn) }}" onclick="event.preventDefault(); document.getElementById('update-form').submit();">Cancel</a>
-                                                    <form id="update-form" action="{{ route('txns.update',  $txn) }}" method="POST"
-                                                        class="d-none">
+                                                <td><a class="text-primary"
+                                                        href="{{ route('txns.edit', $txn) }}">Finish</a>
+                                                    <hr>
+                                                    <a class="text-danger" href="{{ route('txns.update', $txn) }}"
+                                                        onclick="event.preventDefault(); document.getElementById('update-form').submit();">Cancel</a>
+                                                    <form id="update-form" action="{{ route('txns.update', $txn) }}"
+                                                        method="POST" class="d-none">
                                                         @csrf
                                                         {{ method_field('PUT') }}
                                                     </form>
@@ -158,35 +164,17 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Load User and Admin Balance</h4>
-                    <form action="#" class="forms-sample" id="transfer" Method="POST">
+                    <form action="{{ route('txns.store') }}" id="transfer" Method="POST">
                         @csrf
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label" for="acc_no">From Account</label>
-                            <div class="col-sm-9">
-                                <select class="form-control @error('acc_no') is-invalid @enderror" name="acc_no" id="acc_no"
-                                    value="{{ old('acc_no') }}">
-                                    <option value="value=" {{ old('acc_no') }}"">Default</option>
-                                    <option value="{{ Auth::user()->accounts[0]['acc_no'] }}">
-                                        {{ Auth::user()->f_name }}
-                                        {{ Auth::user()->l_name }} - {{ Auth::user()->accounts[0]['acc_no'] }}
-                                    </option>
-                                </select>
-                                @error('acc_no')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="r_acc">Recipient Account</label>
                             <div class="col-sm-8">
-                                <select class="form-control @error('r_acc') is-invalid @enderror" name="r_acc" id="r_acc"
-                                    value="{{ old('r_acc') }}">
+                                <select class="form-control @error('r_acc') is-invalid @enderror" name="r_acc"
+                                    id="r_acc" value="{{ old('r_acc') }}">
                                     <option value="{{ old('r_acc') }}">Default</option>
-                                    @forelse(Auth::user()->accounts as $r_acc)
+                                    @forelse($accounts as $r_acc)
                                         <option value="{{ $r_acc->acc_no }}">
-                                            {{ $r_acc->user->f_name }} {{ $r_acc->user->l_name }}   - {{ $r_acc->acc_no }}
+                                            {{ $r_acc->user->f_name }} {{ $r_acc->user->l_name }} - {{ $r_acc->acc_no }}
                                         @empty
                                         <option value="">You don't have any beneficiary added</option>
                                     @endforelse
@@ -204,8 +192,8 @@
                                 <div class="input-group-text">$</div>
                             </div>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control @error('amt') is-invalid @enderror" name="amt"
-                                    id="amt" value="{{ old('amt') }}" step="0.01">
+                                <input type="number" class="form-control @error('amt') is-invalid @enderror"
+                                    name="amt" id="amt" value="{{ old('amt') }}" step="0.01">
                                 @error('amt')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -218,9 +206,8 @@
                             <div class="col-sm-9">
                                 <select class="form-control @error('txn_type') is-invalid @enderror" name="txn_type"
                                     id="txn_type" value="{{ old('txn_type') }}">
-                                    <option value="{{ old('txn_type') }}">Default</option>
-                                    <option value="International Transfer">International Transfer</option>
-                                    <option value="Local Transfer">Local Transfer</option>
+                                    <option value="#">Default</option>
+                                    <option value="Balance Loading">Balance Loading</option>
                                 </select>
                                 @error('txn_type')
                                     <span class="invalid-feedback" role="alert">
@@ -232,8 +219,8 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="desc">Transfer Decription</label>
                             <div class="col-sm-8">
-                                <textarea type="text" class="form-control @error('desc') is-invalid @enderror" name="desc"
-                                    id="desc" value="{{ old('desc') }}" placeholder="Optional"></textarea>
+                                <textarea type="text" class="form-control @error('desc') is-invalid @enderror" name="desc" id="desc"
+                                    value="{{ old('desc') }}" placeholder="Optional"></textarea>
                                 @error('desc')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

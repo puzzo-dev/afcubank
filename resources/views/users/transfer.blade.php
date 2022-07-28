@@ -51,9 +51,9 @@
                     <ul class="list-arrow font-weight-bold text-uppercase">
                         @forelse(Auth::user()->accounts as $account)
                             <li>Total Number of Transfer: {{ $sum_of_transaction }}</li>
-                            <li>Total Incoming Funds: ${{ $credit_sum }}</li>
-                            <li>Total Outgoing Funds: ${{ $debit_sum }}</li>
-                            <li class="text-danger">Current Balance: ${{ number_format($account['bal'],2) }}</li>
+                            <li>Total Incoming Funds: {{env('CURR_SIGN').$credit_sum }}</li>
+                            <li>Total Outgoing Funds: {{env('CURR_SIGN').$debit_sum }}</li>
+                            <li class="text-danger">Current Balance: {{ env('CURR_SIGN').number_format($account['bal'],2) }}</li>
                         @empty
                             <li>This User Doesn't Have an Account</li>
                         @endforelse
@@ -84,7 +84,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Receiver's Account</th>
+                                    {{-- <th>Receiver's Account</th> --}}
                                     <th>Transaction No</th>
                                     <th>Amount</th>
                                     <th>Transaction Date / Desc</th>
@@ -97,17 +97,17 @@
                                     <tr class="grid-margin">
                                         @if ($txn->txn_flow == 'DEBIT')
                                             <td>
-                                                <i class="ti-arrow-top-right menu-icon text-danger"></i>
+                                                <i class="ti-arrow-top-left menu-icon text-primary"></i>
                                             </td>
                                         @else
                                             <td>
-                                                <i class="ti-arrow-down-left menu-icon text-primary"></i>
+                                                <i class="ti-arrow-top-right menu-icon text-danger"></i>
                                             </td>
                                         @endif
 
-                                        <td>{{ $txn->r_accounts->r_acc_no ?? '[Beneficiary Deleted]'}}</td>
+                                        {{-- <td>{{ $txn->r_accounts->r_acc_no ?? '[Beneficiary Deleted]'}}</td> --}}
                                         <td>{{ $txn->txn_no }}</td>
-                                        <td>$ {{ number_format($txn->txn_amount,2) }}</td>
+                                        <td>{{ env('CURR_SIGN').number_format($txn->txn_amount,2) }}</td>
                                         {{-- <td class="text-wrap">{{ $txn->txn_desc }}</td> --}}
                                         <td class="text-wrap">{{ $txn->txn_desc }} on
                                             {{ date('d-m-Y', strtotime($txn->created_at)) }}</td>

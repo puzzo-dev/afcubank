@@ -1,7 +1,7 @@
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo mr-0" href="{{ route('home') }}"><img src="{{ asset('images/pko-white-bg.svg') }}" class="mr-5"
-                alt="logo" />PKO Bank</a>
+                alt="logo" />{{env('APP_NAME')}}</a>
         <a class="navbar-brand brand-logo-mini" href="{{ route('home') }}"><img src="{{ asset('images/pko-white-bg.svg') }}" alt="logo" /></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">

@@ -20,7 +20,7 @@ class CreateTxnsTable extends Migration
             $table->foreignId('r_account_id')
                   ->nullable()
                   ->constrained()
-                  ->cascadeOnUpdate()
+                //   ->cascadeOnUpdate()
                   ->nullOnDelete();
             $table->string('txn_no');
             $table->string('txn_type');

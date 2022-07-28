@@ -38,14 +38,14 @@
                     <span class ="menu-title">KYC Update</span>
                </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
                <a href="{{ route('notifications.index') }}" class="nav-link">
                     <i class="ti-email menu-icon"></i>
                     <span class ="menu-title">Get Help</span>
                </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
-               <a href="/usettings" class="nav-link">
+               <a href="{{ route('accusers.edit',Auth()->user()) }}" class="nav-link">
                     <i class="ti-settings menu-icon"></i>
                     <span class ="menu-title">Profile Settings</span>
                </a>
