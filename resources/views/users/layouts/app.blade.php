@@ -19,7 +19,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href={{ asset('css/style.css') }}>
   <!-- endinject -->
-  <link rel="shortcut icon" href={{ asset('/images/pko-white-bg.svg') }} />
+  <link rel="shortcut icon" href={{ asset('/images/rbilogo.png') }} />
 </head>
 <body>
      <!-- container-scroller Start -->
