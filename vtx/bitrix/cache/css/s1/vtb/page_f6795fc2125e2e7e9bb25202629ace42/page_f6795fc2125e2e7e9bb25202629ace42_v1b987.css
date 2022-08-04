@@ -1,0 +1,70 @@
+
+
+/* Start:/bitrix/components/vtb/binfo.sliderInactive/templates/readmore/style.css?1655972592168*/
+div.news-detail
+{
+	word-wrap: break-word;
+}
+div.news-detail img.detail_picture
+{
+	float:left;
+	margin:0 8px 6px 1px;
+}
+.news-date-time
+{
+	color:#486DAA;
+}
+
+/* End */
+
+
+/* Start:/bitrix/components/vtb/binfo.text-center/templates/.default/style.css?1655972598577*/
+div.news-detail
+{
+	word-wrap: break-word;
+}
+div.news-detail img.detail_picture
+{
+	float:left;
+	margin:0 8px 6px 1px;
+}
+.news-date-time
+{
+	color:#486DAA;
+}
+.read-more__link {
+	font-family: VTB Group, Arial, sans-serif;
+    font-weight: 700;
+    font-size: .6818181818rem;
+    position: relative;
+    -webkit-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+    cursor: pointer;
+    color: #333;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+/* End */
+
+
+/* Start:/bitrix/components/vtb/corporate.products/templates/.default/style.css?1511253362150*/
+div.news-list
+{
+	word-wrap: break-word;
+}
+div.news-list img.preview_picture
+{
+	float:left;
+	margin:0 4px 6px 0;
+}
+.news-date-time {
+	color:#486DAA;
+}
+
+/* End */
+/* /bitrix/components/vtb/binfo.sliderInactive/templates/readmore/style.css?1655972592168 */
+/* /bitrix/components/vtb/binfo.text-center/templates/.default/style.css?1655972598577 */
+/* /bitrix/components/vtb/corporate.products/templates/.default/style.css?1511253362150 */
