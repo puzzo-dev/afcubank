@@ -91,7 +91,7 @@ popupOpenLink.on('click', function (e) {
                 popupCookie.addClass('state_hidden');
                 break;
             case ('manage-cookies'):
-                if (document.cookie.indexOf("ga-disable-UA-33179576-1") === 0) {
+                if (document.cookie.indexOf("ga-disable-UA-######21-1") === 0) {
                     console.log('tcnm');
                 }
                 cookieSettings.removeClass('state_hidden');

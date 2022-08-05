@@ -53,7 +53,7 @@ font.errortext{color:red}font.notetext{color:green}
 @font-face {
     font-family: VTB Group;
     font-display: auto;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-Bold.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-Bold.woff2) format("woff2");
     font-weight: 700;
     font-style: normal
 }
@@ -61,7 +61,7 @@ font.errortext{color:red}font.notetext{color:green}
 @font-face {
     font-family: VTB Group;
     font-display: auto;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-Book.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-Book.woff2) format("woff2");
     font-weight: 400;
     font-style: normal
 }
@@ -69,7 +69,7 @@ font.errortext{color:red}font.notetext{color:green}
 @font-face {
     font-family: VTB Group Demi;
     font-display: auto;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-DemiBoldOblique.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-DemiBoldOblique.woff2) format("woff2");
     font-weight: 600;
     font-style: italic
 }
@@ -77,7 +77,7 @@ font.errortext{color:red}font.notetext{color:green}
 @font-face {
     font-family: VTB Group Demi;
     font-display: auto;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-DemiBold.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-DemiBold.woff2) format("woff2");
     font-weight: 600;
     font-style: normal
 }
@@ -85,7 +85,7 @@ font.errortext{color:red}font.notetext{color:green}
 @font-face {
     font-family: VTB Group;
     font-display: auto;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-BoldOblique.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-BoldOblique.woff2) format("woff2");
     font-weight: 700;
     font-style: italic
 }
@@ -93,14 +93,14 @@ font.errortext{color:red}font.notetext{color:green}
 @font-face {
     font-family: VTB Group;
     font-display: auto;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-LightOblique.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-LightOblique.woff2) format("woff2");
     font-weight: 300;
     font-style: italic
 }
 
 @font-face {
     font-family: VTB Group Extra;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-ExtraBold.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-ExtraBold.woff2) format("woff2");
     font-weight: 800;
     font-style: normal
 }
@@ -108,7 +108,7 @@ font.errortext{color:red}font.notetext{color:green}
 @font-face {
     font-family: VTB Group Extra;
     font-display: auto;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-ExtraBoldOblique.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-ExtraBoldOblique.woff2) format("woff2");
     font-weight: 800;
     font-style: italic
 }
@@ -116,7 +116,7 @@ font.errortext{color:red}font.notetext{color:green}
 @font-face {
     font-family: VTB Group;
     font-display: auto;
-    src: url(https://www.vtb.eu/bitrix/templates/vtb/common/fonts/VTBGroup-Light.woff2) format("woff2");
+    src: url(https://www.vtbfinance.eu/bitrix/templates/vtb/common/fonts/VTBGroup-Light.woff2) format("woff2");
     font-weight: 300;
     font-style: normal
 }

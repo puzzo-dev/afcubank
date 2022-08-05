@@ -5,9 +5,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <div class="align-self-center">
-                            <img class="mx-auto d-block m-5" src={{ asset('images/pko-white-bg.svg') }}
-                                height='100px' width='100px;' alt="logo">
+                        <div class="align-self-center brand-logo">
+                            <img class="mx-auto d-block m-5 brand-logo" src={{ asset('images/app_logo.png') }}
+                                alt="logo">
                         </div>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf

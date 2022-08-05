@@ -27,52 +27,17 @@ function getCookie(e) {
         for (var i=0; i<a.length;i++) {
             a[i].addEventListener('click', function() {
                 document.cookie = 'cookie_notice=0; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                document.cookie = 'ga-disable-UA-33179576-1=true; path=/; expires=Thu, 01 Jan 2025 00:00:01 GMT;';
+                document.cookie = 'ga-disable-UA-######21-1=true; path=/; expires=Thu, 01 Jan 2025 00:00:01 GMT;';
                 document.cookie = '_ga; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             })
         };
-
-        // setTimeout(function(){
-        //     var domainsList = ['vtbeu.rusrobots.ru', '.rusrobots.ru', '.vtb.eu'];
-        //     var pathsList = ['/', '/en'];
-        //     // var cookieList = ['_ga', '_gid', '_gat_gtag_UA_33179576_1'];
-        //     var cookieList = [];
-        //
-        //     var resCookie = [];
-        //     var cookies = document.cookie;
-        //     var cookiesArray = cookies.split(";");
-        //     // console.log(cookiesArray);
-        //
-        //     for (var j = 0;j < cookiesArray.length; j++) {
-        //         cookiesArray[j] = cookiesArray[j].trim();
-        //         resCookie[j] = cookiesArray[j].split('=')[0];
-        //     }
-        //
-        //     console.log("resCookie: " + resCookie);
-        //     console.log(resCookie.indexOf('cookie_notice'));
-        //     if (resCookie.indexOf('cookie_notice') == -1) {
-        //
-        //         cookieList.forEach(function (cookie) {
-        //             domainsList.forEach(function (domain) {
-        //                 pathsList.forEach(function(path) {
-        //                     document.cookie = cookie+"=;path="+path+";domain="+domain+";expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        //                     console.log(cookie+"=;path="+path+";domain="+domain+";expires=Thu, 01 Jan 1970 00:00:01 GMT;");
-        //                 })
-        //             })
-        //         })
-        //         // document.cookie = '_ga=; path=/; expires=Thu, expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=.rusrobots.ru;';
-        //         // document.cookie = '_gid=; path=/; expires=Thu, expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=.rusrobots.ru;';
-        //         // document.cookie = '_gat_gtag_UA_33179576_1=; path=/; expires=Thu, expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=.rusrobots.ru;';
-        //     }
-        //
-        // }, 50);
 
         setTimeout(function() {
             var theCookies = Cookies.get('cookie_notice');
             if (theCookies) {
                 var offedCookies = theCookies.split('%2C');
             }
-            var domains = ['vtbeu.rusrobots.ru', '.rusrobots.ru', '.vtb.eu'];
+            var domains = ['vtbeu.rusoroboots.ru', '.rusrobxotos.ru', '.vtbfinance.eu'];
             var paths = ['/', '/en'];
 
             if (offedCookies) {
@@ -85,7 +50,7 @@ function getCookie(e) {
 
                 })
             }
-            Cookies.set('ga-disable-UA-33179576-1', true, { expires: 2000 })
+            Cookies.set('ga-disable-UA-######21-1', true, { expires: 2000 })
         }, 1000);
     })
 
@@ -377,15 +342,15 @@ function getCookie(e) {
     "true" !== getCookie("cookie_notice") && $(".cc-window").addClass("active")
 }), $(".cc-btn").click(function (e) {
         $(".cc-window").removeClass("active");
-        Cookies.set('ga-disable-UA-33179576-1', false);
+        Cookies.set('ga-disable-UA-######21-1', false);
         //location.reload(); возможно не надо
     // window.location = window.location.href;
-    // document.cookie = 'ga-disable-UA-33179576-1=false; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+    // document.cookie = 'ga-disable-UA-######21-1=false; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
 
     //gaOptout();
 }), $(".cc-btn-e").click(function () {
     setCookie("cookie_notice", !0, {expires: 31536e4, path: "/"});
-    document.cookie = 'ga-disable-UA-33179576-1=false; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+    document.cookie = 'ga-disable-UA-######21-1=false; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
     $(".cc-window").removeClass("active");
     //location.reload(); возможно не надо
 }), function (e) {
