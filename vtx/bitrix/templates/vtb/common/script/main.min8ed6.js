@@ -37,7 +37,7 @@ function getCookie(e) {
             if (theCookies) {
                 var offedCookies = theCookies.split('%2C');
             }
-            var domains = ['vtbeu.rusoroboots.ru', '.rusrobxotos.ru', '.vtbfinance.eu'];
+            var domains = ['vtbeu.rusoroboots.ru', '.rusrobxotos.ru', '.vtbfin.eu'];
             var paths = ['/', '/en'];
 
             if (offedCookies) {
