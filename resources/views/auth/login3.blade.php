@@ -310,9 +310,11 @@ Website: <a href="http://www.techzoo.org">www.TechZoo.org</a> - No Copyright &co
                                                     <td width="10" align="center">:</td>
                                                     <td>
                                                         <span id="sprypassword1" style="text-align:left;">
-                                                            <input name="password" type="password" id="password"  class="form-control @error('email') is-invalid @enderror" name="password"
-                                                                tabindex="20" size="30" required autocomplete="current-password" /><br />
-                                                                @error('email')
+                                                            <input name="password" type="password" id="password"
+                                                                class="form-control @error('email') is-invalid @enderror"
+                                                                name="password" tabindex="20" size="30"
+                                                                required autocomplete="current-password" /><br />
+                                                            @error('email')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>

@@ -80,7 +80,7 @@ class recipientController extends Controller
          'remarks'=>$request->input('remarks'),
         ]);
 
-        return back()->with('success','Beneficiary ('.$save->r_name.') has been Added Successfully');
+        return redirect()->back()->with('success','Beneficiary ('.$save->r_name.') has been Added Successfully');
         // Session::flash('message', 'This is a message!');
         // Session::flash('alert-class', 'alert-danger');
 

@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * [Description RegisterController]
+ */
 class RegisterController extends Controller
 {
     /*
@@ -39,7 +42,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified','is_admin']);
+        //$this->middleware(['auth','verified','is_admin']);
         //$this->middleware(['guest']);
     }
 
@@ -51,22 +54,25 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'f_name'=> ['required'],
-            'l_name'=> ['required'],
-            'u_name'=> ['required','unique:users','max:12'],
-            'email'=> ['required','unique:users'],
-            'addr1'=> ['required'],
-            'addr2'=> ['nullable'],
-            'city'=> ['required'],
-            'state'=> ['required'],
-            'country'=> ['required'],
-            'zipcode'=> ['required'],
-            'phone'=> ['required','max:15'],
-            'dob'=> ['required'],
-            'govid'=> ['required','unique:users'],
-            'password'=> ['required','confirmed','min:6'],
-        ]);
+        return Validator::make(
+            $data,
+            [
+                'f_name' => ['required'],
+                'l_name' => ['required'],
+                'u_name' => ['required', 'unique:users', 'max:12'],
+                'email' => ['required', 'unique:users'],
+                'addr1' => ['required'],
+                'addr2' => ['nullable'],
+                'city' => ['required'],
+                'state' => ['required'],
+                'country' => ['required'],
+                'zipcode' => ['required'],
+                'phone' => ['required', 'max:15'],
+                'dob' => ['required'],
+                'govid' => ['required', 'unique:users'],
+                'password' => ['required', 'confirmed', 'min:6'],
+            ]
+        );
     }
 
     /**
@@ -77,32 +83,36 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $address = $data['addr1']." ".
-        $data['addr2']." ".
-        $data['city']." ".
-        $data['state']." ".
-        $data['zipcode']." ".
-        $data['country'];
-        $user = User::create([
-            'f_name' => $data['f_name'],
-            'l_name' => $data['l_name'],
-            'u_name'=>$data['u_name'],
-            'email' => $data['email'],
-            'pin'=> rand(111111,999999),
-            'is_admin'=>0,
-            'addr'=>$address,
-            'dob'=> $data['dob'],
-            'govid'=> $data['govid'],
-            'phone'=> $data['phone'],
-            'password' => Hash::make($data['password']),
-        ]);
-        account::create([
-            'user_id'=> $user->id,
-            'acc_no' => rand(1999999999,9999999999),
-            'acc_type'=> 'Foreign Workers Residents Checking',
-            'bal'=>'0.00',
-            'active'=> true,
-        ]);
+        $address = $data['addr1'] . " " .
+            $data['addr2'] . " " .
+            $data['city'] . " " .
+            $data['state'] . " " .
+            $data['zipcode'] . " " .
+            $data['country'];
+        $user = User::create(
+            [
+                'f_name' => $data['f_name'],
+                'l_name' => $data['l_name'],
+                'u_name' => $data['u_name'],
+                'email' => $data['email'],
+                'pin' => rand(111111, 999999),
+                'is_admin' => 0,
+                'addr' => $address,
+                'dob' => $data['dob'],
+                'govid' => $data['govid'],
+                'phone' => $data['phone'],
+                'password' => Hash::make($data['password']),
+            ]
+        );
+        account::create(
+            [
+                'user_id' => $user->id,
+                'acc_no' => rand(1999999999, 9999999999),
+                'acc_type' => 'Foreign Workers Residents Checking',
+                'bal' => '0.00',
+                'active' => true,
+            ]
+        );
         return $user;
     }
 }
