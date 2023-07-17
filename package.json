@@ -29,7 +29,7 @@
     "main": "index.blade.php",
     "dependencies": {
         "@mdi/font": "^3.6.95",
-        "ace-builds": "^1.2.9",
+        "ace-builds": "^1.23.0",
         "bootstrap": "^4.5.0",
         "bootstrap-datepicker": "^1.9.0",
         "bootstrap-maxlength": "1.6.0",
