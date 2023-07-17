@@ -38,7 +38,7 @@
         "codemirror": "^5.47.0",
         "colcade": "^0.2.0",
         "datatables.net": "^1.10.19",
-        "datatables.net-bs4": "^1.10.19",
+        "datatables.net-bs4": "^1.13.4",
         "flag-icon-css": "^3.3.0",
         "font-awesome": "4.7.0",
         "gulp-sourcemaps": "^2.6.3",
